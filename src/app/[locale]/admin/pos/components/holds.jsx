@@ -198,7 +198,7 @@ export function Holds() {
                             <AlertDialogHeader>
                               <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                               <AlertDialogDescription>
-                                You want to delete order
+                                You want to delete order {" "}
                                 <span className="font-semibold">
                                   ID-{hold.id}
                                 </span>
