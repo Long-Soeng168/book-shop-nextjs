@@ -384,7 +384,7 @@ export default function Detail({ payments, customers }) {
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>Note {orderNote}</DialogTitle>
+                      <DialogTitle>Note</DialogTitle>
                       <DialogDescription />
                       <Input
                         onChange={(e) => setOrderNote(e.target.value)}

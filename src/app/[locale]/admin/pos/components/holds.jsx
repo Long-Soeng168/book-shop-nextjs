@@ -1,7 +1,15 @@
 "use client";
 
 import * as React from "react";
-import { Edit, Eye, ListEnd, ListXIcon, ReceiptTextIcon, Trash } from "lucide-react";
+import {
+  Edit,
+  Eye,
+  ListEnd,
+  ListXIcon,
+  ReceiptTextIcon,
+  Trash,
+  Trash2,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -19,12 +27,30 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import { getHolds, deleteHold } from "@/services/invoices-services";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 import { usePOSCart } from "@/contexts/POSContext";
 import { usePOSDetailContext } from "@/contexts/POSDetailContext";
 import CartItem from "./cart-item";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function Holds() {
   const [holds, setHolds] = React.useState([]);
@@ -67,6 +93,7 @@ export function Holds() {
 
   const handleEdit = (index) => {
     // console.log(holds[index]);
+    setIsDrawerDetailHoldOpen(false);
     clearCart();
     addMultipleToCart(holds[index].items);
     setSelectedCustomer(holds[index].customer?.id || 0);
@@ -131,7 +158,7 @@ export function Holds() {
                           Customer: {hold.customer?.name || "N/A"}
                         </p>
                         <p className="text-gray-600">
-                          Total Products: {hold.items?.length || 0}
+                          Total Items: {hold.items?.length || 0}
                         </p>
                         {hold.discount != 0 && (
                           <p className="text-gray-600">
@@ -151,39 +178,103 @@ export function Holds() {
                         </p>
                       </div>
                       <div className="flex flex-wrap items-center justify-end gap-2 mt-2">
-                        <Button
-                          onClick={() => {
-                            setSelectedForView(index);
-                            setIsDrawerDetailHoldOpen(true)}}
-                          size="icon"
-                          variant="outline"
-                        >
-                          <Eye className="w-4 h-4" />
-                          <span className="sr-only">View</span>
-                        </Button>
-                        <Button
-                          size="icon"
-                          onClick={() => {
-                            handleEdit(index);
-                          }}
-                        >
-                          <Edit className="w-4 h-4" />
-                          <span className="sr-only">Edit</span>
-                        </Button>
-                        <Button size="icon" className="bg-yellow-500">
-                          <ReceiptTextIcon className="w-4 h-4" />
-                          <span className="sr-only">Print</span>
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            handleDelete(hold.id);
-                          }}
-                          size="icon"
-                          variant="destructive"
-                        >
-                          <Trash className="w-4 h-4" />
-                          <span className="sr-only">Delete</span>
-                        </Button>
+                        <AlertDialog>
+                          <TooltipProvider delayDuration={0}>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <AlertDialogTrigger asChild>
+                                  <Button size="icon" variant="destructive">
+                                    <Trash2 className="w-4 h-4" />
+                                    <span className="sr-only">Delete</span>
+                                  </Button>
+                                </AlertDialogTrigger>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Delete</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                You want to delete order
+                                <span className="font-semibold">
+                                  ID-{hold.id}
+                                </span>
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction
+                                className="bg-destructive hover:bg-destructive/80 text-destructive-foreground"
+                                onClick={() => {
+                                  handleDelete(hold.id);
+                                }}
+                              >
+                                <Trash2 />
+                                Delete
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+
+                        <TooltipProvider delayDuration={0}>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                size="icon"
+                                className="bg-yellow-500 hover:bg-yellow-400"
+                              >
+                                <ReceiptTextIcon className="w-4 h-4" />
+                                <span className="sr-only">Print</span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Print Invoice</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+
+                        <TooltipProvider delayDuration={0}>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                onClick={() => {
+                                  setSelectedForView(index);
+                                  setIsDrawerDetailHoldOpen(true);
+                                }}
+                                size="icon"
+                                variant="outline"
+                              >
+                                <Eye className="w-4 h-4" />
+                                <span className="sr-only">View</span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>View Detail</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+
+                        <TooltipProvider delayDuration={0}>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                size="icon"
+                                onClick={() => {
+                                  handleEdit(index);
+                                }}
+                              >
+                                <Edit className="w-4 h-4" />
+                                <span className="sr-only">Edit</span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Edit</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
                       </div>
                     </div>
                   ))}
@@ -198,57 +289,113 @@ export function Holds() {
         open={isDrawerDetailHoldOpen}
         onOpenChange={(state) => setIsDrawerDetailHoldOpen(state)}
       >
-        <SheetContent side="left">
+        <SheetContent side="left" className="w-full px-0 sm:max-w-auto">
           <SheetHeader>
-            <SheetTitle className='hidden' />
-            <SheetDescription className='hidden'  />
+            <SheetTitle className="hidden" />
+            <SheetDescription className="hidden" />
           </SheetHeader>
-          <div className="text-base">
-            <span className="text-xl font-bold">ID-{holds[selectedForView]?.id}</span>
-            <p className="text-gray-600">
-              Customer: {holds[selectedForView]?.customer?.name || "N/A"}
-            </p>
-            <p className="text-gray-6selectedForView">
-              Total Products: {holds[selectedForView]?.items?.length || 0}
-            </p>
-            {holds[selectedForView]?.discount != 0 && (
-              <p className="text-gray-600">
-                Total Discount: {holds[selectedForView]?.discount || 0}
-                {holds[selectedForView]?.discountType == "dollar" ? " $" : " %"}
-              </p>
-            )}
-            <p className="text-gray-600">
-              Total Price:{" "}
-              <span className="text-destructive">
-                {holds[selectedForView]?.total || "0"} $
+          <div className="flex flex-col h-screen px-2 text-base">
+            <div>
+              <span className="text-xl font-bold">
+                ID-{holds[selectedForView]?.id}
               </span>
-            </p>
-            <p className="text-base text-gray-950 line-clamp-5">
-              <span className="font-bold">Note</span>: {holds[selectedForView]?.note || "N/A"}
-            </p>
-            <table className="w-full">
-              <tbody>
-                <tr>
-                  <th></th>
-                  <th className="text-gray-500">Items</th>
-                  <th className="text-gray-500">Qrt</th>
-                  <th className="text-gray-500">Total</th>
-                </tr>
-                {holds[selectedForView]?.items?.length > 0 ? (
-                  holds[selectedForView]?.items?.map((item, index) => (
-                    <CartItem isReadOnly={true} item={item} key={index} />
-                  ))
-                ) : (
+              <p className="text-gray-600">
+                Customer: {holds[selectedForView]?.customer?.name || "N/A"}
+              </p>
+              <p className="text-gray-6selectedForView">
+                Total Products: {holds[selectedForView]?.items?.length || 0}
+              </p>
+              {holds[selectedForView]?.discount != 0 && (
+                <p className="text-gray-600">
+                  Total Discount: {holds[selectedForView]?.discount || 0}
+                  {holds[selectedForView]?.discountType == "dollar"
+                    ? " $"
+                    : " %"}
+                </p>
+              )}
+              <p className="text-gray-600">
+                Total Price:{" "}
+                <span className="text-destructive">
+                  {holds[selectedForView]?.total || "0"} $
+                </span>
+              </p>
+              <p className="text-base text-gray-950 line-clamp-5">
+                <span className="font-bold">Note</span>:{" "}
+                {holds[selectedForView]?.note || "N/A"}
+              </p>
+            </div>
+            <ScrollArea className="relative flex-1 w-full py-2 mt-4 mb-8 border rounded-lg ">
+              <table className="w-full mb-12">
+                <tbody>
                   <tr>
-                    <td colSpan={5} className="pt-10">
-                      <div className="flex justify-center text-primary">
-                        <ListXIcon /> No Data..
-                      </div>
-                    </td>
+                    <th></th>
+                    <th className="text-gray-500">Items</th>
+                    <th className="text-gray-500">Qrt</th>
+                    <th className="text-gray-500">Total</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
+                  {holds[selectedForView]?.items?.length > 0 ? (
+                    holds[selectedForView]?.items?.map((item, index) => (
+                      <CartItem isReadOnly={true} item={item} key={index} />
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={5} className="pt-10">
+                        <div className="flex justify-center text-primary">
+                          <ListXIcon /> No Data..
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+              <div className="absolute bottom-0 right-0 flex items-center justify-center w-full h-12 gap-2 p-2 bg-white/50 backdrop-blur-md">
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="destructive">
+                      <Trash2 className="w-4 h-4" />
+                      <span>Delete</span>
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        You want to delete order{" "}
+                        <span className="font-semibold">
+                          ID-{holds[selectedForView]?.id}
+                        </span>
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        className="bg-destructive hover:bg-destructive/80 text-destructive-foreground"
+                        onClick={() => {
+                          setIsDrawerDetailHoldOpen(false);
+                          handleDelete(holds[selectedForView]?.id);
+                        }}
+                      >
+                        <Trash2 />
+                        Delete
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+
+                <Button className="bg-yellow-500 hover:bg-yellow-400">
+                  <ReceiptTextIcon className="w-4 h-4" />
+                  <span>Print Invoice</span>
+                </Button>
+                <Button
+                  onClick={() => {
+                    handleEdit(selectedForView);
+                  }}
+                >
+                  <Edit className="w-4 h-4" />
+                  <span>Edit</span>
+                </Button>
+              </div>
+            </ScrollArea>
           </div>
         </SheetContent>
       </Sheet>

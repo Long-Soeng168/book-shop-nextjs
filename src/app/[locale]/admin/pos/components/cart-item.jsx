@@ -28,9 +28,9 @@ const CartItem = ({ item, isReadOnly = false }) => {
       <td>
         <div className="flex-1 shrink-0">
           <p className="text-sm line-clamp-2 shrink-0">{item.title}</p>
-          <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 line-clamp-1 shrink-0 whitespace-nowrap ">
+          <div className="flex flex-wrap items-center text-sm text-gray-600 line-clamp-1 shrink-0 whitespace-nowrap ">
             <p
-              className={`text-sm text-gray-600 ${
+              className={`text-sm text-gray-600 mr-2 ${
                 hasDiscount ? "line-through" : "text-red-600"
               }`}
             >
