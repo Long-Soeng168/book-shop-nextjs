@@ -129,9 +129,11 @@ export function Holds() {
               <ListEnd className="text-primary" />
               <span>Holds</span>
             </span>
-            <span className="absolute px-1.5 bg-yellow-400 rounded-full right-0.5 -top-2 text-xs font-bold">
-              {holds?.length}
-            </span>
+            {holds?.length > 0 && (
+              <span className="absolute px-1.5 bg-yellow-400 rounded-full right-0.5 -top-2 text-xs font-bold">
+                {holds?.length}
+              </span>
+            )}
           </Button>
         </DrawerTrigger>
         <DrawerContent>
@@ -198,7 +200,7 @@ export function Holds() {
                             <AlertDialogHeader>
                               <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                               <AlertDialogDescription>
-                                You want to delete order {" "}
+                                You want to delete order{" "}
                                 <span className="font-semibold">
                                   ID-{hold.id}
                                 </span>
