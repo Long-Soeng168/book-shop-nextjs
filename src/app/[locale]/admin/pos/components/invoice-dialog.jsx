@@ -56,7 +56,7 @@ const InvoiceDialog = () => {
           Open
         </DialogTrigger>
         <DialogContent
-          className="h-screen"
+          className="h-screen max-h-[90vh]"
           closeBtnClassName="-top-0.5 -right-0.5"
         >
           <DialogHeader className={`hidden`}>
