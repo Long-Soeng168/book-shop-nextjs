@@ -8,6 +8,7 @@ import { getCategories } from "@/services/categories-services";
 import SuccessDialog from "./components/success-dialog";
 import { getPayments } from "@/services/payments-services";
 import { getCustomers } from "@/services/customers-services";
+import InvoiceDialog from "./components/invoice-dialog";
 
 export default async function Home(props) {
   const categories = await getCategories({
@@ -81,6 +82,7 @@ export default async function Home(props) {
           <Detail payments={payments} customers={customers} />
         </div>
       </div>
+      <InvoiceDialog />
       <SuccessDialog />
       {/* 
       <main className="mx-auto md:grid md:grid-cols-12 max-w-screen-2xl">

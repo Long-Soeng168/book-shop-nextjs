@@ -44,35 +44,37 @@ import {
 import { useEffect, useState } from "react";
 import CartItem from "./cart-item";
 import SuccessDialog from "./success-dialog";
-import { usePOSDetailContext } from "@/contexts/POSDetailContext";
 import { Label } from "@/components/ui/label";
+import { usePOSDetailContext } from "@/contexts/POSDetailContext";
+import { useInvoiceContext } from "@/contexts/POSInvoiceContext";
 
 export default function Detail({ payments, customers }) {
   const [isMounted, setIsMounted] = useState(false);
   const {
     selectedCustomer,
     setSelectedCustomer,
-    isOpenDialog,
+    discountAmount,
+    setDiscountAmount,
+    discountType,
+    setDiscountType,
     setIsOpenDialog,
     orderNote,
     setOrderNote,
+    setSuccessMessage,
+    setIsOpenSuccessDialog,
+    setIsShowBtnInSuccessDialog,
   } = usePOSDetailContext();
+
+  const { setInvoice } = useInvoiceContext();
 
   const { clearCart, cartItems, getTotalPrice } = usePOSCart();
   const [receivedDollar, setReceivedDollar] = useState(0);
   const [receivedRiel, setReceivedRiel] = useState(0);
-  const [discountAmount, setDiscountAmount] = useState(0);
-  const [discountType, setDiscountType] = useState("percentage");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [selectedPaymentError, setSelectedPaymentError] = useState(null);
-
-  const [successMessage, setSuccessMessage] = useState(false);
-  const [isOpenSuccessSubmit, setIsOpenSuccessSubmit] = useState(false);
-  const [isShowBtnInSuccessSubmit, setIsShowBtnInSuccessSubmit] =
-    useState(false);
 
   const getTotalAfterDiscountRiel = () => {
     return discountType == "percentage"
@@ -176,6 +178,9 @@ export default function Detail({ payments, customers }) {
       if (!response.ok) {
         throw new Error("Failed to place the order. Please contact admin.");
       }
+      const createdInvoice = await response.json();
+      setInvoice(createdInvoice?.invoice);
+      // console.log(createdInvoice?.invoice);
 
       // Handle success (e.g., navigate to the success page)
       setDiscountAmount(0);
@@ -184,11 +189,11 @@ export default function Detail({ payments, customers }) {
       setSelectedPayment(null);
       setSelectedCustomer(0);
       setOrderNote(null);
-      
+
       clearCart();
-      setIsShowBtnInSuccessSubmit(true);
-      setIsOpenSuccessSubmit(true);
-      setSuccessMessage('Order successfully created.')
+      setIsShowBtnInSuccessDialog(true);
+      setIsOpenSuccessDialog(true);
+      setSuccessMessage("Order successfully created.");
       // router.push("/cart/success");
     } catch (error) {
       setError(error.message);
@@ -237,7 +242,9 @@ export default function Detail({ payments, customers }) {
       if (!response.ok) {
         throw new Error("Failed to place the order. Please contact admin.");
       }
-
+      const createdHold = await response.json();
+      setInvoice(createdHold?.invoice);
+      // console.log(createdHold?.invoice);
       // Handle success (e.g., navigate to the success page)
       setDiscountAmount(0);
       setReceivedDollar(0);
@@ -245,11 +252,12 @@ export default function Detail({ payments, customers }) {
       setSelectedPayment(null);
       setSelectedCustomer(0);
       setOrderNote(null);
-      
+
       clearCart();
-      setIsShowBtnInSuccessSubmit(false);
-      setIsOpenSuccessSubmit(true);
-      setSuccessMessage('Placed in hold success.')
+      setIsShowBtnInSuccessDialog(true);
+      setIsOpenSuccessDialog(true);
+      setIsOpenDialog(false);
+      setSuccessMessage("Placed in hold success.");
       // router.push("/cart/success");
     } catch (error) {
       setError(error.message);
@@ -273,7 +281,7 @@ export default function Detail({ payments, customers }) {
   //       </div>
   //       <SuccessDialog
   //         isOpen={isOpenSuccessSubmit}
-  //         setIsOpen={setIsOpenSuccessSubmit}
+  //         setIsOpen={setIsOpenSuccessDialog}
   //       />
   //     </section>
   //   );
@@ -364,7 +372,12 @@ export default function Detail({ payments, customers }) {
             <Dialog>
               <div className="flex gap-2 mb-2">
                 <ShadCNButton
-                  onClick={clearCart}
+                  onClick={() => {
+                    clearCart();
+                    setIsOpenSuccessDialog(true);
+                    setSuccessMessage("Clear Items Successfully.");
+                    setIsOpenDialog(false);
+                  }}
                   size="mySize"
                   variant="destructive"
                   className="w-full p-2 mb-2 rounded-lg"
@@ -611,12 +624,6 @@ export default function Detail({ payments, customers }) {
           )}
         </div>
       </section>
-      <SuccessDialog
-        isOpen={isOpenSuccessSubmit}
-        setIsOpen={setIsOpenSuccessSubmit}
-        isShowBtnInSuccessSubmit={isShowBtnInSuccessSubmit}
-        message={successMessage}
-      />
     </>
   );
 }

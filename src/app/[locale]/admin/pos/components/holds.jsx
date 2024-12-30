@@ -51,6 +51,7 @@ import { usePOSCart } from "@/contexts/POSContext";
 import { usePOSDetailContext } from "@/contexts/POSDetailContext";
 import CartItem from "./cart-item";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useInvoiceContext } from "@/contexts/POSInvoiceContext";
 
 export function Holds() {
   const [holds, setHolds] = React.useState([]);
@@ -67,7 +68,14 @@ export function Holds() {
     setSelectedCustomer,
     isOpenDialog,
     setIsOpenDialog,
+    discountAmount,
+    setDiscountAmount,
+    discountType,
+    setDiscountType,
   } = usePOSDetailContext();
+
+  const { invoice, setInvoice, isOpenInvoiceDialog, setIsOpenInvoiceDialog } =
+    useInvoiceContext();
 
   const { addMultipleToCart, clearCart } = usePOSCart();
 
@@ -97,8 +105,16 @@ export function Holds() {
     clearCart();
     addMultipleToCart(holds[index].items);
     setSelectedCustomer(holds[index].customer?.id || 0);
+    setDiscountAmount(holds[index].discount || 0);
+    setDiscountType(holds[index].discountType || "percentage");
     handleDelete(holds[index].id);
     setIsDrawerOpen(false);
+  };
+
+  const handlePrintInvoice = (index) => {
+    setInvoice(holds[index]);
+    setIsOpenInvoiceDialog(true);
+    // console.log(holds[selectedForView]);
   };
 
   const handleDelete = (id) => {
@@ -129,11 +145,11 @@ export function Holds() {
               <ListEnd className="text-primary" />
               <span>Holds</span>
             </span>
-            {holds?.length > 0 && (
+            {/* {holds?.length > 0 && (
               <span className="absolute px-1.5 bg-yellow-400 rounded-full right-0.5 -top-2 text-xs font-bold">
                 {holds?.length}
               </span>
-            )}
+            )} */}
           </Button>
         </DrawerTrigger>
         <DrawerContent>
@@ -152,10 +168,10 @@ export function Holds() {
                   {holds?.map((hold, index) => (
                     <div
                       key={hold.id}
-                      className="items-start justify-between gap-2 p-3 bg-gray-100 rounded-md"
+                      className="flex flex-col justify-between h-full gap-2 p-3 bg-gray-100 rounded-md "
                     >
                       <div className="text-base">
-                        <span className="text-xl font-bold">ID-{hold.id}</span>
+                        <span className="text-xl font-bold">#{hold.id}</span>
                         <p className="text-gray-600">
                           Customer: {hold.customer?.name || "N/A"}
                         </p>
@@ -227,6 +243,9 @@ export function Holds() {
                               <Button
                                 size="icon"
                                 className="bg-yellow-500 hover:bg-yellow-400"
+                                onClick={() => {
+                                  handlePrintInvoice(index);
+                                }}
                               >
                                 <ReceiptTextIcon className="w-4 h-4" />
                                 <span className="sr-only">Print</span>
@@ -299,15 +318,21 @@ export function Holds() {
           <div className="flex flex-col h-screen px-2 text-base">
             <div>
               <span className="text-xl font-bold">
-                ID-{holds[selectedForView]?.id}
+                #{holds[selectedForView]?.id}
               </span>
               <p className="text-gray-600">
                 Customer: {holds[selectedForView]?.customer?.name || "N/A"}
               </p>
-              <p className="text-gray-6selectedForView">
+              <p className="text-gray-600">
                 Total Products: {holds[selectedForView]?.items?.length || 0}
               </p>
-              {holds[selectedForView]?.discount != 0 && (
+              <p className="text-gray-600">
+                Sub-Total:{" "}
+                <span className="text-destructive">
+                  {holds[selectedForView]?.subtotal || "0"} $
+                </span>
+              </p>
+              {holds[selectedForView]?.discount && (
                 <p className="text-gray-600">
                   Total Discount: {holds[selectedForView]?.discount || 0}
                   {holds[selectedForView]?.discountType == "dollar"
@@ -321,6 +346,7 @@ export function Holds() {
                   {holds[selectedForView]?.total || "0"} $
                 </span>
               </p>
+
               <p className="text-base text-gray-950 line-clamp-5">
                 <span className="font-bold">Note</span>:{" "}
                 {holds[selectedForView]?.note || "N/A"}
@@ -384,7 +410,12 @@ export function Holds() {
                   </AlertDialogContent>
                 </AlertDialog>
 
-                <Button className="bg-yellow-500 hover:bg-yellow-400">
+                <Button
+                  onClick={() => {
+                    handlePrintInvoice(index);
+                  }}
+                  className="bg-yellow-500 hover:bg-yellow-400"
+                >
                   <ReceiptTextIcon className="w-4 h-4" />
                   <span>Print Invoice</span>
                 </Button>

@@ -14,11 +14,20 @@ import {
 } from "@/components/ui/sheet";
 
 import Detail from "@/app/[locale]/admin/pos/components/Detail";
+import { usePOSDetailContext } from "@/contexts/POSDetailContext";
 
 const OrderButton = ({customers, payments}) => {
   const { cartItems } = usePOSCart();
   const [isHydrated, setIsHydrated] = React.useState(false);
-  const [isOpen, setIsOpen] = React.useState(false);
+
+  const {
+      selectedCustomer,
+      setSelectedCustomer,
+      isOpenDialog,
+      setIsOpenDialog,
+      orderNote,
+      setOrderNote,
+    } = usePOSDetailContext();
 
   React.useEffect(() => {
     setIsHydrated(true);
@@ -28,12 +37,12 @@ const OrderButton = ({customers, payments}) => {
     <section className="lg:hidden">
       <Sheet
         modal={false}
-        open={isOpen}
-        onOpenChange={(state) => setIsOpen(state)} // Properly manage the open state
+        open={isOpenDialog}
+        onOpenChange={(state) => setIsOpenDialog(state)} // Properly manage the open state
       >
         <SheetTrigger asChild>
           <Button
-            onClick={() => setIsOpen(true)}
+            onClick={() => setIsOpenDialog(true)}
             className="relative flex items-center border-[0.5px] h-11"
           >
             <ListChecksIcon />

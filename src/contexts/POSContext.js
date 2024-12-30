@@ -113,17 +113,17 @@ export function POSCartProvider({ children }) {
 
   const addToCart = (product, isShowDialog = false) => {
     dispatch({ type: "ADD_TO_CART", payload: product });
-    isShowDialog && showDialog(`${product.title} has been added to the cart.`);
+    // isShowDialog && showDialog(`${product.title} has been added to the cart.`);
   };
 
   const addMultipleToCart = (products, isShowDialog = false) => {
     dispatch({ type: "ADD_MULTIPLE_TO_CART", payload: products });
-    isShowDialog && showDialog("Multiple items have been added to the cart.");
+    // isShowDialog && showDialog("Multiple items have been added to the cart.");
   };
 
   const removeFromCart = (product) => {
     dispatch({ type: "REMOVE_FROM_CART", payload: product });
-    showDialog(`${product.title} has been removed from the cart.`);
+    // showDialog(`${product.title} has been removed from the cart.`);
   };
 
   const handleQuantityChange = (id, delta) => {
@@ -135,7 +135,7 @@ export function POSCartProvider({ children }) {
 
   const clearCart = (isShowDialog = false) => {
     dispatch({ type: "CLEAR_CART" });
-    isShowDialog && showDialog("Your cart has been cleared.");
+    // isShowDialog && showDialog("Your cart has been cleared.");
   };
 
   const getTotalItemCount = () => {
