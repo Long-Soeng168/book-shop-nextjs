@@ -14,7 +14,12 @@ import { Button } from "@/components/ui/button";
 
 import html2pdf from "html2pdf.js";
 import { useInvoiceContext } from "@/contexts/POSInvoiceContext";
-import { APP_ADDRESS, APP_CONTACT, APP_EMAIL, APP_NAME } from "@/config/website-detail";
+import {
+  APP_ADDRESS,
+  APP_CONTACT,
+  APP_EMAIL,
+  APP_NAME,
+} from "@/config/website-detail";
 
 const InvoiceDialog = () => {
   const [isClient, setIsClient] = React.useState(false);
@@ -141,7 +146,7 @@ const InvoiceDialog = () => {
                         Subtotal
                       </th>
                       <td className="px-4 py-2 text-right border-t whitespace-nowrap">
-                        {invoice.subtotal} $
+                        {Number(invoice.subtotal).toFixed(2)} $
                       </td>
                     </tr>
                     <tr>
@@ -170,7 +175,7 @@ const InvoiceDialog = () => {
                         Total
                       </th>
                       <td className="px-4 py-2 text-right">
-                        {invoice.total} $
+                        {Number(invoice.total).toFixed(2)} $
                       </td>
                     </tr>
                     {/* <tr className="absolute bottom-0 left-0 p-4 bg-yellow-200">
@@ -191,6 +196,9 @@ const InvoiceDialog = () => {
           </div>
 
           <div className="flex justify-end gap-2">
+            <Button variant="secondary" className='bg-gray-100' onClick={() => setIsOpenInvoiceDialog(false)}>
+              Cancel
+            </Button>
             <Button variant="outline" onClick={handleDownloadPDF}>
               <FileDown />
               Download PDF
