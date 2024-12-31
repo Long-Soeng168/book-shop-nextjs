@@ -124,6 +124,7 @@ const InvoiceDialog = () => {
                       height={30}
                       alt=""
                       src={`/images/app_logo.png`}
+                      className="object-contain w-8 h-8"
                     />
                     <h2
                       className={`font-semibold ${
