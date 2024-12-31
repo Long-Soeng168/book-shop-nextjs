@@ -1,20 +1,62 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu";
-import { AlignLeft, Layout, LogOut, PanelTop } from "lucide-react";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { BASE_API_URL, BASE_BACKEND_URL } from "@/config/env";
+import { AlignLeft, Layout, LogOut, PanelsTopLeft, PanelTop } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const POSHeaderMenu = ({className}) => {
+const POSHeaderMenu = ({ className }) => {
+  const token = localStorage.getItem("token");
+  const user = localStorage.getItem("user");
+  const router = useRouter();
+  const handleLogout = async () => {
+    // API URL for logout (update with your backend's actual URL)
+    const url = `${BASE_API_URL}/logout`;
+
+    try {
+      // Send a logout request to the server
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      const result = await response.json();
+      // console.log(result)
+
+      if (response.ok) {
+        // If logout is successful, remove the token from localStorage
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        // Redirect to the login page
+        router.push("/login");
+      } else {
+        // Handle error (e.g., show an error message)
+        console.error("Logout failed", response);
+      }
+    } catch (error) {
+      console.error("Logout error", error);
+    }
+  };
   return (
     <div className={`${className}`}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="shrink-0 h-11 border-[0.5px]">
+          <Button
+            variant="outline"
+            size="sm"
+            className="shrink-0 h-11 border-[0.5px]"
+          >
             <AlignLeft className="text-primary" />
           </Button>
         </DropdownMenuTrigger>
@@ -22,22 +64,32 @@ const POSHeaderMenu = ({className}) => {
           <DropdownMenuLabel>Menu</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <PanelTop />
-            Fronend Page
+            <Link href={`/`} className="flex items-center gap-1">
+              <PanelTop size={18} />
+              Frontend Page
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Layout />
-            Dashboard
+            <Link href={BASE_BACKEND_URL} className="flex items-center gap-1">
+              <PanelsTopLeft size={18} />
+              Admin Page
+            </Link>
           </DropdownMenuItem>
+
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <div>
-              <p className="font-semibold line-clamp-1">Long Soeng</p>
-              <p className="line-clamp-2">longsoeng@gmail.com</p>
+              <p className="font-semibold line-clamp-1">{user.name}</p>
+              <p className="line-clamp-2">{user.email}</p>
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <LogOut /> Logout
+            <button
+              onClick={() => handleLogout()}
+              className="flex items-center gap-1"
+            >
+              <LogOut size={18} /> Logout
+            </button>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
