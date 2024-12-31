@@ -53,7 +53,7 @@ const MyHeader = async () => {
           {/* <MyHeaderSearchInput /> */}
           <MySearch placeholder={t("searchBooks")} />
           <MyCartButtonHeader />
-          <Link href="/login">
+          <Link href="/admin/pos">
             <Button variant="outline" size="icon">
               <User2 />
             </Button>

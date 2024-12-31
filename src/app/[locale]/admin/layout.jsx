@@ -51,11 +51,9 @@ const AdminLayout = ({ children }) => {
     checkAuthentication();
   }, [token, router]);
 
-  if (loading) {
-    return <MyLoadingAnimation />; // Show loading state while checking authentication
-  }
-
-  return (
+  return loading ? (
+    <MyLoadingAnimation />
+  ) : (
     <POSCartProvider>
       <POSDetailProvider>
         <InvoiceProvider>{children}</InvoiceProvider>
