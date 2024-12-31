@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 
 const POSHeaderMenu = ({ className }) => {
   const token = localStorage.getItem("token");
-  const user = localStorage.getItem("user");
+  const user = JSON.parse(localStorage.getItem("user"));
   const router = useRouter();
   const handleLogout = async () => {
     // API URL for logout (update with your backend's actual URL)
