@@ -34,7 +34,7 @@ const Page = () => {
         <Link href="/" className="flex items-center gap-2 overflow-hidden">
           <Image
             className="object-contain rounded-md"
-            src="/images/logo_thnal.png"
+            src="/images/app_logo.png"
             width={35}
             height={35}
             alt="Logo Image"

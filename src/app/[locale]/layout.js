@@ -16,7 +16,7 @@ const kantumruyPro = Kantumruy_Pro({
 
 export const metadata = {
   icons: {
-    icon: `${APP_URL}images/logo_thnal.png`,
+    icon: `${APP_URL}images/app_logo.png`,
   },
 };
 

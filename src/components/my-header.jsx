@@ -32,7 +32,7 @@ const MyHeader = async () => {
           <Link href="/" className="flex items-center gap-2 overflow-hidden">
             <Image
               className="object-contain rounded-md"
-              src="/images/logo_thnal.png"
+              src="/images/app_logo.png"
               width={60}
               height={60}
               alt="Logo Image"

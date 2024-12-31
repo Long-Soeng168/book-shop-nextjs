@@ -29,7 +29,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: `${APP_URL}images/logo_thnal.png`, // replace with the actual image URL
+        url: `${APP_URL}images/app_logo.png`, // replace with the actual image URL
         width: 500,
         height: 500,
         alt: "Thnal Cambodia's Leading Bookshop",
@@ -37,7 +37,7 @@ export const metadata = {
     ],
   },
   twitter: {
-    card: `${APP_URL}images/logo_thnal.png`,
+    card: `${APP_URL}images/app_logo.png`,
     title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
     description:
       "Discover Thnal, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",

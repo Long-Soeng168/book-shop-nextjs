@@ -20,6 +20,7 @@ import {
   APP_EMAIL,
   APP_NAME,
 } from "@/config/website-detail";
+import Image from "next/image";
 
 const InvoiceDialog = () => {
   const [printSize, setPrintSize] = React.useState("80");
@@ -112,6 +113,8 @@ const InvoiceDialog = () => {
                   )}
                 </div>
                 <div className="flex flex-col items-end space-y-1 text-right">
+                  <div className="flex items-center gap-1">
+                    <Image width={30} height={30} alt="" src={`/images/app_logo.png`}/>
                   <h2
                     className={`font-semibold ${
                       printSize === "80" ? "text-lg" : "text-xl"
@@ -119,6 +122,7 @@ const InvoiceDialog = () => {
                   >
                     {APP_NAME}
                   </h2>
+                  </div>
                   <p className="text-sm">{APP_ADDRESS}</p>
                   <p className="text-sm">{APP_CONTACT}</p>
                 </div>

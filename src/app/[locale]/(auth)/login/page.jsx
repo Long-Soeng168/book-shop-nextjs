@@ -11,7 +11,7 @@ export default function LoginPage() {
               <Image
                 width={200}
                 height={200}
-                src="/images/logo_thnal.png"
+                src="/images/app_logo.png"
                 alt="Thnal Logo Image"
                 className="inset-0 object-cover dark:brightness-[0.2] dark:grayscale"
               />
@@ -29,7 +29,7 @@ export default function LoginPage() {
         <Image
           width={200}
           height={200}
-          src="/images/logo_thnal.png"
+          src="/images/app_logo.png"
           alt="Thnal Logo Image"
           className="inset-0 object-cover dark:brightness-[0.2] dark:grayscale"
         />
