@@ -374,6 +374,7 @@ export default function Detail({ payments, customers }) {
                 <ShadCNButton
                   onClick={() => {
                     clearCart();
+                    setOrderNote('');
                     setIsOpenSuccessDialog(true);
                     setSuccessMessage("Clear Items Successfully.");
                     setIsOpenDialog(false);

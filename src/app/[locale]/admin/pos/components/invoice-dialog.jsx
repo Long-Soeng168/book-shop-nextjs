@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { File, FileDown, ReceiptTextIcon } from "lucide-react";
+import { File, FileDown, HandHeartIcon, ReceiptTextIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import html2pdf from "html2pdf.js";
@@ -22,6 +22,7 @@ import {
 } from "@/config/website-detail";
 
 const InvoiceDialog = () => {
+  const [printSize, setPrintSize] = React.useState("80");
   const [isClient, setIsClient] = React.useState(false);
   React.useEffect(() => {
     setIsClient(true);
@@ -63,74 +64,92 @@ const InvoiceDialog = () => {
             <DialogTitle />
             <DialogDescription />
           </DialogHeader>
-          <div className="mb-4 overflow-y-auto border border-gray-300 border-dashed rounded-lg">
-            <div ref={contentRef} className="max-w-4xl p-6 mx-auto bg-white ">
-              <div className="grid grid-cols-2 pb-4 mb-4 border-b border-gray-400 border-dashed">
-                <div className="flex flex-col items-start">
-                  <h1 className="text-2xl font-bold text-gray-800">Invoice</h1>
-                  <p className="text-sm text-gray-600">
+          <div className="relative mb-4 overflow-y-auto border border-gray-300 border-dashed rounded-lg custom-scrollbar">
+            <div
+              ref={contentRef}
+              className={`mx-auto p-4 bg-white text-black ${
+                printSize === "80" ? "w-[80mm]" : "max-w-4xl"
+              }`}
+            >
+              {/* Header Section */}
+              <div className="grid grid-cols-2 gap-4 pb-4 mb-4 border-b border-black border-dashed">
+                <div className="flex flex-col items-start space-y-1">
+                  <h1
+                    className={`font-bold ${
+                      printSize === "80" ? "text-lg" : "text-2xl"
+                    }`}
+                  >
+                    Invoice
+                  </h1>
+                  <p className="text-sm">
                     #
                     {new Intl.NumberFormat("en", {
                       minimumIntegerDigits: 6,
                       useGrouping: false,
                     }).format(invoice.id)}
-                    {/* #{invoice.id} */}
                   </p>
-                  <p className="text-sm text-gray-600 whitespace-nowrap">
+                  <p className="text-sm">
                     {invoice?.created_at &&
                       new Date(invoice.created_at).toLocaleDateString("en-GB", {
                         year: "numeric",
                         month: "short",
                         day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
                       })}
                   </p>
                   {invoice?.payment?.name && (
-                    <p className="flex gap-1 text-sm text-gray-600">
-                      <span>Pay With: </span>
-                      <span>{invoice?.payment?.name}</span>
+                    <p className="text-sm">
+                      <span className="font-medium">Pay With: </span>
+                      {invoice?.payment?.name}
                     </p>
                   )}
                   {invoice?.customer?.name && (
-                    <p className="flex gap-1 text-sm text-gray-600">
-                      <span>Customer:</span>
-                      <span>{invoice?.customer?.name}</span>
+                    <p className="text-sm">
+                      <span className="font-medium">Customer: </span>
+                      {invoice?.customer?.name}
                     </p>
                   )}
                 </div>
-                <div className="flex flex-col items-end text-right">
-                  <h2 className="text-xl font-semibold text-gray-800">
+                <div className="flex flex-col items-end space-y-1 text-right">
+                  <h2
+                    className={`font-semibold ${
+                      printSize === "80" ? "text-lg" : "text-xl"
+                    }`}
+                  >
                     {APP_NAME}
                   </h2>
-                  <p className="text-sm text-gray-600">{APP_ADDRESS}</p>
-                  <p className="text-sm text-gray-600">{APP_CONTACT}</p>
-                  <p className="text-sm text-gray-600">{APP_EMAIL}</p>
+                  <p className="text-sm">{APP_ADDRESS}</p>
+                  <p className="text-sm">{APP_CONTACT}</p>
                 </div>
               </div>
+
+              {/* Table Section */}
               <div className="mb-6 overflow-x-auto">
-                <table className="min-w-full text-sm text-gray-600 border border-gray-300">
-                  <thead className="text-gray-800 bg-gray-100">
+                <table className="w-full text-sm border border-gray-300">
+                  <thead className="bg-gray-100">
                     <tr>
-                      <th className="px-4 py-2 border-b">Item</th>
-                      <th className="px-4 py-2 text-right border-b">Qty</th>
-                      <th className="px-4 py-2 text-right border-b">Price</th>
-                      <th className="px-4 py-2 text-right border-b">Total</th>
+                      <th className="px-2 py-1 border-b">Item</th>
+                      <th className="px-2 py-1 text-right border-b">Qty</th>
+                      <th className="px-2 py-1 text-right border-b">Price</th>
+                      <th className="px-2 py-1 text-right border-b">Total</th>
                     </tr>
                   </thead>
                   <tbody>
                     {invoice?.items?.map((item) => (
                       <tr key={item.id}>
-                        <td className="px-4 py-2 border-b">{item.title}</td>
-                        <td className="px-4 py-2 text-right border-b">
+                        <td className="px-2 py-1 border-b">{item.title}</td>
+                        <td className="px-2 py-1 text-right border-b">
                           {item.quantity}
                         </td>
-                        <td className="px-4 py-2 text-right border-b whitespace-nowrap">
+                        <td className="px-2 py-1 text-right border-b whitespace-nowrap">
                           {(
                             item.price -
                             item.price * (item.discount / 100)
                           ).toFixed(2)}{" "}
                           $
                         </td>
-                        <td className="px-4 py-2 text-right border-b whitespace-nowrap">
+                        <td className="px-2 py-1 text-right border-b whitespace-nowrap">
                           {(
                             (item.price - item.price * (item.discount / 100)) *
                             item.quantity
@@ -140,25 +159,25 @@ const InvoiceDialog = () => {
                       </tr>
                     ))}
                   </tbody>
-                  <tfoot className="relative bg-gray-100">
+                  <tfoot className="bg-gray-100">
                     <tr>
-                      <th className="px-4 py-2 text-right border-t" colSpan="3">
+                      <th className="px-2 py-1 text-right border-t" colSpan="3">
                         Subtotal
                       </th>
-                      <td className="px-4 py-2 text-right border-t whitespace-nowrap">
+                      <td className="px-2 py-1 text-right border-t whitespace-nowrap">
                         {Number(invoice.subtotal).toFixed(2)} $
                       </td>
                     </tr>
                     <tr>
                       <th
-                        className="px-4 py-2 text-right whitespace-nowrap"
+                        className="px-2 py-1 text-right whitespace-nowrap"
                         colSpan="3"
                       >
                         Discount ({invoice.discount}
-                        {invoice.discountType == "dollar" ? " $" : " %"})
+                        {invoice.discountType === "dollar" ? " $" : " %"})
                       </th>
-                      <td className="px-4 py-2 text-right whitespace-nowrap">
-                        {invoice.discountType == "dollar"
+                      <td className="px-2 py-1 text-right whitespace-nowrap">
+                        {invoice.discountType === "dollar"
                           ? invoice.discount
                           : (
                               invoice.subtotal *
@@ -168,35 +187,30 @@ const InvoiceDialog = () => {
                       </td>
                     </tr>
                     <tr>
-                      <th
-                        className="px-4 py-2 text-right whitespace-nowrap"
-                        colSpan="3"
-                      >
+                      <th className="px-2 py-1 text-right" colSpan="3">
                         Total
                       </th>
-                      <td className="px-4 py-2 text-right">
+                      <td className="px-2 py-1 text-right">
                         {Number(invoice.total).toFixed(2)} $
                       </td>
                     </tr>
-                    {/* <tr className="absolute bottom-0 left-0 p-4 bg-yellow-200">
-                      <td>paid</td>
-                    </tr> */}
                   </tfoot>
                 </table>
               </div>
 
-              <div className="text-sm text-center text-gray-600">
+              {/* Footer Section */}
+              <div className="text-sm text-center">
                 <p>Thank you for your purchase!</p>
-                <p>
-                  If you have any questions about this invoice, please contact
-                  us at {APP_EMAIL}.
-                </p>
               </div>
             </div>
           </div>
 
           <div className="flex justify-end gap-2">
-            <Button variant="secondary" className='bg-gray-100' onClick={() => setIsOpenInvoiceDialog(false)}>
+            <Button
+              variant="secondary"
+              className="bg-gray-100"
+              onClick={() => setIsOpenInvoiceDialog(false)}
+            >
               Cancel
             </Button>
             <Button variant="outline" onClick={handleDownloadPDF}>
@@ -207,6 +221,22 @@ const InvoiceDialog = () => {
               <ReceiptTextIcon />
               Print
             </Button>
+          </div>
+          <div className="absolute top-0 space-x-1 left-6">
+            <button
+              size="icon"
+              onClick={() => setPrintSize('80')}
+              className={`px-1 text-sm ${printSize == '80' ? 'text-gray-100 bg-black' : 'text-gray-950 bg-gray-200'} rounded-sm`}
+            >
+              80mm
+            </button>
+            <button
+              size="icon"
+              onClick={() => setPrintSize('a4')}
+              className={`px-1 text-sm ${printSize == 'a4' ? 'text-gray-100 bg-black' : 'text-gray-950 bg-gray-200'} rounded-sm`}
+            >
+              A4
+            </button>
           </div>
         </DialogContent>
       </Dialog>

@@ -30,7 +30,7 @@ export default function SelectCustomer({customers, selectedCustomer, setSelected
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] overflow-x-auto justify-between border-[0.5px] rounded-none"
+          className="w-[200px] overflow-hidden justify-between border-[0.5px] rounded-none"
         >
           {value
             ? customers.find((customer) => customer.id == value)?.name

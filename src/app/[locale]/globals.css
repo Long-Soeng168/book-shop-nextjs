@@ -142,3 +142,22 @@
   -ms-overflow-style: none; /* Hides scrollbar for Internet Explorer and Edge */
   scrollbar-width: none; /* Hides scrollbar for Firefox */
 }
+
+
+/* @media print {
+  .invoice-container {
+    width: 72mm;
+    font-size: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 4px;
+    border: 1px solid black;
+    font-size: 8px;
+  }
+} */

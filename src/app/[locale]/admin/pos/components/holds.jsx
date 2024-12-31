@@ -5,6 +5,7 @@ import {
   Edit,
   Eye,
   ListEnd,
+  ListX,
   ListXIcon,
   ReceiptTextIcon,
   Trash,
@@ -64,18 +65,13 @@ export function Holds() {
     React.useState(false);
   const token = localStorage.getItem("token");
   const {
-    selectedCustomer,
     setSelectedCustomer,
-    isOpenDialog,
-    setIsOpenDialog,
-    discountAmount,
     setDiscountAmount,
-    discountType,
     setDiscountType,
+    setOrderNote,
   } = usePOSDetailContext();
 
-  const { invoice, setInvoice, isOpenInvoiceDialog, setIsOpenInvoiceDialog } =
-    useInvoiceContext();
+  const { setInvoice, setIsOpenInvoiceDialog } = useInvoiceContext();
 
   const { addMultipleToCart, clearCart } = usePOSCart();
 
@@ -108,6 +104,7 @@ export function Holds() {
     setDiscountAmount(holds[index].discount || 0);
     setDiscountType(holds[index].discountType || "percentage");
     handleDelete(holds[index].id);
+    setOrderNote(holds[index].note);
     setIsDrawerOpen(false);
   };
 
@@ -156,7 +153,7 @@ export function Holds() {
           <div className="flex flex-col w-full mx-auto">
             <DrawerHeader className="p-0">
               <DrawerTitle className="flex items-center justify-center gap-2 py-2 text-xl font-bold">
-                <ListEnd /> Order Holds
+                Order Holds
               </DrawerTitle>
               <DrawerDescription className="hidden" />
             </DrawerHeader>
@@ -301,6 +298,10 @@ export function Holds() {
                   ))}
                 </div>
               )}
+              {
+                !loading && holds?.length == 0 &&
+                <p className="flex items-center justify-center gap-2 text-primary"><ListX /> No Data</p>
+              }
             </div>
           </div>
         </DrawerContent>
