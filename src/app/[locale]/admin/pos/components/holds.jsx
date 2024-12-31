@@ -413,7 +413,7 @@ export function Holds() {
 
                 <Button
                   onClick={() => {
-                    handlePrintInvoice(index);
+                    handlePrintInvoice(selectedForView);
                   }}
                   className="bg-yellow-500 hover:bg-yellow-400"
                 >
