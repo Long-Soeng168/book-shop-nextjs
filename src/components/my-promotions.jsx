@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { IMAGE_PROMOTION_URL } from "@/config/env";
 
 const MyPromotions = async ({ promotions }) => {
   const t = await getTranslations('Index');
@@ -21,7 +22,7 @@ const MyPromotions = async ({ promotions }) => {
           <Image
             width={300}
             height={300}
-            src={process.env.IMAGE_PROMOTION_URL + promotions[0].image}
+            src={IMAGE_PROMOTION_URL + promotions[0].image}
             alt=""
             className="object-contain w-full p-4 mt-4 aspect-square"
           />
@@ -61,7 +62,7 @@ const MyPromotions = async ({ promotions }) => {
                 <Image
                   width={150}
                   height={150}
-                  src={process.env.IMAGE_PROMOTION_URL + promotion.image}
+                  src={IMAGE_PROMOTION_URL + promotion.image}
                   alt=""
                   className="object-contain min-w-40"
                 />

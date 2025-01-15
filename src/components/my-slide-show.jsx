@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import { getSlides } from "@/services/slides-services";
 import Link from "next/link";
+import { IMAGE_SLIDE_URL } from "@/config/env";
 
 const MySlideShow = async ({className}) => {
   const topSlides = await getSlides({ position: "top" }) || [];
@@ -27,7 +28,7 @@ const MySlideShow = async ({className}) => {
                     }`}
                     width={1050}
                     height={300}
-                    src={process.env.IMAGE_SLIDE_URL + slide.image}
+                    src={IMAGE_SLIDE_URL + slide.image}
                     alt={slide.name}
                   />
                 </Link>
@@ -51,7 +52,7 @@ const MySlideShow = async ({className}) => {
                     }`}
                     width={1050}
                     height={300}
-                    src={process.env.IMAGE_SLIDE_URL + slide.image}
+                    src={IMAGE_SLIDE_URL + slide.image}
                     alt={slide.name}
                   />
                 </Link>

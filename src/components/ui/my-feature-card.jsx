@@ -1,3 +1,4 @@
+import { IMAGE_FEATURE_URL } from "@/config/env";
 import React from "react";
 
 const MyFeatureCard = ({feature}) => {
@@ -7,7 +8,7 @@ const MyFeatureCard = ({feature}) => {
     >
       <div className="mb-4 text-4xl text-indigo-500 dark:text-indigo-400">
         <img 
-          src={process.env.IMAGE_FEATURE_URL + feature.image}
+          src={IMAGE_FEATURE_URL + feature.image}
           alt="" 
         />
       </div>

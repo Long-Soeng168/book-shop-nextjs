@@ -1,5 +1,7 @@
+import { BASE_API_URL } from "@/config/env";
+
 export async function getPayments() {
-  const url = process.env.BASE_API_URL + `/payments`;
+  const url = BASE_API_URL + `/payments`;
   try {
     const response = await fetch(url, {
       next: {

@@ -11,6 +11,7 @@ import { RotateCwIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import ScrollToTop from "@/components/scroll-to-top";
+import { BASE_API_URL } from "@/config/env";
 
 export default function Component() {
   const router = useRouter(); // Get the router object from Next.js
@@ -76,7 +77,7 @@ export default function Component() {
     setLoading(true);
 
     try {
-      const response = await fetch(process.env.BASE_API_URL + "/orders", {
+      const response = await fetch(BASE_API_URL + "/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

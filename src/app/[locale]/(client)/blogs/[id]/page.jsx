@@ -66,7 +66,7 @@ export default async function Page({ params }) {
               width={1000}
               height={1000}
               className="w-full rounded-md"
-              src={process.env.IMAGE_BLOG_URL + blog.image}
+              src={IMAGE_BLOG_URL + blog.image}
               alt={"Image's " + blog.name}
             />
           )}
@@ -116,7 +116,7 @@ export default async function Page({ params }) {
                     width={100}
                     height={100}
                     className="object-cover w-full aspect-video"
-                    src={process.env.IMAGE_BLOG_URL + blog.image}
+                    src={IMAGE_BLOG_URL + blog.image}
                     alt={"Image's blog"}
                   />
 

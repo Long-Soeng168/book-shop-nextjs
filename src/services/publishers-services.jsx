@@ -1,5 +1,7 @@
+import { BASE_API_URL } from "@/config/env";
+
 export async function getPublishers() {
-    const url = process.env.BASE_API_URL + `/publishers`;
+    const url = BASE_API_URL + `/publishers`;
     try {
       const response = await fetch(url, {
         next: {

@@ -1,3 +1,4 @@
+import { IMAGE_LINK_URL } from "@/config/env";
 import Image from "next/image";
 
 const MySocialLinkCard = ({ image, link, title }) => {
@@ -11,7 +12,7 @@ const MySocialLinkCard = ({ image, link, title }) => {
           width={50}
           height={50}
           alt={title}
-          src={process.env.IMAGE_LINK_URL + image}
+          src={IMAGE_LINK_URL + image}
         />
         {title}
       </a>

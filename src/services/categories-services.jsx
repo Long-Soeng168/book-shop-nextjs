@@ -1,3 +1,5 @@
+import { BASE_API_URL } from "@/config/env";
+
 export async function getCategories({
   limit,
   withSub,
@@ -5,7 +7,7 @@ export async function getCategories({
   orderDir,
 } = {}) {
   const url =
-    process.env.BASE_API_URL +
+    BASE_API_URL +
     `/categories?limit=${limit || ""}&withSub=${withSub || ""}&orderBy=${
       orderBy || ""
     }&orderDir=${orderDir || ""}`;
@@ -26,7 +28,7 @@ export async function getCategories({
 }
 
 export async function getCategoryHasMostBooks() {
-  const url = process.env.BASE_API_URL + `/categories_most_books`;
+  const url = BASE_API_URL + `/categories_most_books`;
   try {
     const response = await fetch(url, {
       next: {

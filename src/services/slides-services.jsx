@@ -1,5 +1,7 @@
+import { BASE_API_URL } from "@/config/env";
+
 export async function getSlides({position} = {}) {
-  const url = process.env.BASE_API_URL + `/slides?position=${position || ''}`;
+  const url = BASE_API_URL + `/slides?position=${position || ''}`;
   try {
     const response = await fetch(url, {
       next: {

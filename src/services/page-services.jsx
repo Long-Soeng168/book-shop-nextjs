@@ -1,5 +1,7 @@
+import { BASE_API_URL } from "@/config/env";
+
 export async function fetchAPI(endpoint) {
-  const url = process.env.BASE_API_URL + endpoint;
+  const url = BASE_API_URL + endpoint;
   try {
     const response = await fetch(url, {
       next: {

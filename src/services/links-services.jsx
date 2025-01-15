@@ -1,5 +1,7 @@
+import { BASE_API_URL } from "@/config/env";
+
 export async function getLinks() {
-  const url = process.env.BASE_API_URL + `/links`;
+  const url = BASE_API_URL + `/links`;
   try {
     const response = await fetch(url, {
       next: {

@@ -4,6 +4,7 @@ import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { IMAGE_BLOG_URL } from "@/config/env";
 
 const MyBlogList = async ({ blogs }) => {
   const t = await getTranslations('Index');
@@ -20,7 +21,7 @@ const MyBlogList = async ({ blogs }) => {
               width={600}
               height={600}
               className="object-cover w-full rounded-md aspect-video"
-              src={process.env.IMAGE_BLOG_URL + blog.image}
+              src={IMAGE_BLOG_URL + blog.image}
               alt=""
             />
             <div className="my-4">

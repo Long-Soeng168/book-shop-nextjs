@@ -1,5 +1,7 @@
+import { BASE_API_URL } from "@/config/env";
+
 export async function getPromotions() {
-  const url = process.env.BASE_API_URL + `/promotions`;
+  const url = BASE_API_URL + `/promotions`;
   try {
     const response = await fetch(url, {
       next: {

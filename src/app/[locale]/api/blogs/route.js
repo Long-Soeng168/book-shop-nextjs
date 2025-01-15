@@ -1,5 +1,7 @@
 // app/api/blogs/route.js
 
+import { BASE_API_URL } from "@/config/env";
+
 export async function GET(request) {
     const url = new URL(request.url);
     const search = url.searchParams.get('search') || '';
@@ -8,7 +10,7 @@ export async function GET(request) {
   
     try {
       const response = await fetch(
-        `${process.env.BASE_API_URL}/news?categoryId=${categoryId}&search=${search}&perPage=${perPage}`
+        `${BASE_API_URL}/news?categoryId=${categoryId}&search=${search}&perPage=${perPage}`
       );
       if (!response.ok) {
         throw new Error('Failed to fetch blogs');

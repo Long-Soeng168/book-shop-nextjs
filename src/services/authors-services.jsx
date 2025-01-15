@@ -1,5 +1,7 @@
+import { BASE_API_URL } from "@/config/env";
+
 export async function getAuthors() {
-    const url = process.env.BASE_API_URL + `/authors`;
+    const url = BASE_API_URL + `/authors`;
     try {
       const response = await fetch(url, {
         next: {

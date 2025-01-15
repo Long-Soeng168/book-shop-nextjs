@@ -1,3 +1,4 @@
+import { IMAGE_CATE_URL } from "@/config/env";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,7 +20,7 @@ const MyCategoryCard = async ({
               className={`aspect-square object-contain`}
               width={40}
               height={40}
-              src={process.env.IMAGE_CATE_URL + category.image}
+              src={IMAGE_CATE_URL + category.image}
               alt=""
             />
           </div>

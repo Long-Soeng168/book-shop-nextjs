@@ -1,7 +1,9 @@
 // const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+import { BASE_API_URL } from "@/config/env";
+
 export async function getBlogs({categoryId, perPage, currentPage, search} = {}) {
-  const url = process.env.BASE_API_URL + `/news?categoryId=${categoryId || ''}&perPage=${perPage || ''}&search=${search || ''}&page=${currentPage || ''}`;
+  const url = BASE_API_URL + `/news?categoryId=${categoryId || ''}&perPage=${perPage || ''}&search=${search || ''}&page=${currentPage || ''}`;
 
   // await sleep(3000);
 
@@ -25,7 +27,7 @@ export async function getBlogs({categoryId, perPage, currentPage, search} = {}) 
 }
 
 export async function getBlog(id) {
-  const url = process.env.BASE_API_URL + "/news/" + id;
+  const url = BASE_API_URL + "/news/" + id;
   try {
     const response = await fetch(url, {
       next: {
@@ -46,7 +48,7 @@ export async function getBlog(id) {
 }
 
 export async function getBlogCategories() {
-  const url = process.env.BASE_API_URL + `/news_categories`;
+  const url = BASE_API_URL + `/news_categories`;
   try {
     const response = await fetch(url, {
       next: {

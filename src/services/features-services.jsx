@@ -1,5 +1,7 @@
+import { BASE_API_URL } from "@/config/env";
+
 export async function getFeatures() {
-  const url = process.env.BASE_API_URL + `/features`;
+  const url = BASE_API_URL + `/features`;
   try {
     const response = await fetch(url, {
       next: {

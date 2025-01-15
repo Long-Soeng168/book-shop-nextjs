@@ -1,5 +1,7 @@
+import { BASE_API_URL } from "@/config/env";
+
 export async function getNewArrivalBooks() {
-  const url = process.env.BASE_API_URL + `/books_new_arrival`;
+  const url = BASE_API_URL + `/books_new_arrival`;
   try {
     const response = await fetch(url, {
       next: {
@@ -20,7 +22,7 @@ export async function getNewArrivalBooks() {
 
 export async function getBestSellingBooks({ limit } = {}) {
   const url =
-    process.env.BASE_API_URL + `/books_best_selling?limit=${limit || ""}`;
+    BASE_API_URL + `/books_best_selling?limit=${limit || ""}`;
   try {
     const response = await fetch(url, {
       next: {
@@ -72,7 +74,7 @@ export async function getBooks({
     publisherId,
   });
 
-  const url = `${process.env.BASE_API_URL}/books?${queryParams}`;
+  const url = `${BASE_API_URL}/books?${queryParams}`;
   try {
     const response = await fetch(url, {
       next: {
@@ -121,7 +123,7 @@ export async function getKidBooks({
     publisherId,
   });
 
-  const url = `${process.env.BASE_API_URL}/kid_books?${queryParams}`;
+  const url = `${BASE_API_URL}/kid_books?${queryParams}`;
   try {
     const response = await fetch(url, {
       next: {
@@ -139,7 +141,7 @@ export async function getKidBooks({
 }
 
 export async function getBook({ id }) {
-  const url = process.env.BASE_API_URL + `/books/${id}`;
+  const url = BASE_API_URL + `/books/${id}`;
   try {
     const response = await fetch(url, {
       next: {

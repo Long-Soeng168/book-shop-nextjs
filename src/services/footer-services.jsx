@@ -1,5 +1,7 @@
+import { BASE_API_URL } from "@/config/env";
+
 export async function getFooter() {
-  const url = process.env.BASE_API_URL + `/footer`;
+  const url = BASE_API_URL + `/footer`;
   try {
     const response = await fetch(url, {
       next: {

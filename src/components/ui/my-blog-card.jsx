@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button"; // Adjust import path based on your project
 import { getTranslations } from "next-intl/server";
+import { IMAGE_BLOG_URL } from "@/config/env";
 
 const MyBlogCard = async ({ blog }) => {
   const t = await getTranslations('Index');
@@ -15,7 +16,7 @@ const MyBlogCard = async ({ blog }) => {
           width={600}
           height={600}
           className="object-cover w-full rounded-md aspect-video"
-          src={process.env.IMAGE_BLOG_URL + blog.image}
+          src={IMAGE_BLOG_URL + blog.image}
           alt={'Image\'s ' + blog.name}
         />
         <div className="my-4">
