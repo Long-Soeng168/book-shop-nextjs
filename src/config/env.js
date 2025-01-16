@@ -14,6 +14,7 @@ const IMAGE_PROMOTION_URL= BASE_BACKEND_URL + "/assets/images/promotions/";
 const IMAGE_FEATURE_URL= BASE_BACKEND_URL + "/assets/images/features/";
 
 const BOOK_PDF_URL = BASE_BACKEND_URL + "/assets/pdf/books/";
+
 export {
   IMAGE_BOOK_URL,
   IMAGE_CATE_URL,
