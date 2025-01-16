@@ -33,20 +33,6 @@ export default async function RootLayout({ children, params }) {
   return (
     <>
       <html lang={locale} suppressHydrationWarning>
-        {/* google Ads */}
-        <head>
-          <Script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2937517680506251"
-            crossorigin="anonymous"
-          ></Script>
-          <meta
-            name="google-adsense-account"
-            content="ca-pub-2937517680506251"
-          />
-        </head>
-        {/* google Ads */}
-
         <body className={`${kantumruyPro.className}`}>
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider
