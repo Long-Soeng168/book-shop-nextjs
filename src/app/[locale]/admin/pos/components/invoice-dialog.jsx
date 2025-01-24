@@ -43,7 +43,7 @@ const InvoiceDialog = () => {
       margin: 0.5,
       filename: "invoice.pdf",
       image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 4},
+      html2canvas: { scale: 4 },
       jsPDF: {
         unit: "mm",
         format: printSize === "80" ? "letter" : "A4",
@@ -139,17 +139,19 @@ const InvoiceDialog = () => {
             >
               A4
             </button>
-            <button
-              size="icon"
-              onClick={() => setPrintSize("quote")}
-              className={`px-1 text-sm ${
-                printSize == "quote"
-                  ? "text-gray-100 bg-black"
-                  : "text-gray-950 bg-gray-200"
-              } rounded-sm`}
-            >
-              Quote
-            </button>
+            {invoice?.status !== 1 && (
+              <button
+                size="icon"
+                onClick={() => setPrintSize("quote")}
+                className={`px-1 text-sm ${
+                  printSize == "quote"
+                    ? "text-gray-100 bg-black"
+                    : "text-gray-950 bg-gray-200"
+                } rounded-sm`}
+              >
+                Quote
+              </button>
+            )}
           </div>
         </DialogContent>
       </Dialog>
