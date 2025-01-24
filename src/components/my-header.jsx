@@ -14,6 +14,7 @@ import MySearch from "./ui/my-search";
 import MyHomeModal from "./my-home-modal";
 import { User2 } from "lucide-react";
 import { Button } from "./ui/button";
+import { BASE_BACKEND_URL } from "@/config/env";
 
 const MyHeader = async () => {
   const resultCateogries = await getCategories({
@@ -53,7 +54,7 @@ const MyHeader = async () => {
           {/* <MyHeaderSearchInput /> */}
           <MySearch placeholder={t("searchBooks")} />
           <MyCartButtonHeader />
-          <Link href="/admin/pos">
+          <Link href={BASE_BACKEND_URL}>
             <Button variant="outline" size="icon">
               <User2 />
             </Button>

@@ -1,7 +1,5 @@
 // src/ProductCard.js
 import React from "react";
-import { Button } from "./button";
-import { Heart, Plus, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -13,17 +11,17 @@ import {
 import { IMAGE_BOOK_URL } from "@/config/env";
 import MyAddToCartMini from "../my-add-to-cart-mini";
 
-const ProductCard = ({ product, endpoint = '/products' }) => {
+const ProductCard = ({ product, endpoint = "/products" }) => {
   return (
     <div className="flex flex-col items-stretch justify-between w-full h-full transition-all duration-500 rounded-lg group hover:scale-95">
       <div>
-        <div className="relative overflow-hidden ">
+        <div className="relative mb-1 overflow-hidden">
           <Link href={`${endpoint}/${product.id}`}>
             <Image
               width={600}
               height={600}
               className="object-cover w-full border-[0.5px] border-primary rounded-md aspect-[6/9] font-moul"
-              src={IMAGE_BOOK_URL + 'thumb/' + product.image}
+              src={IMAGE_BOOK_URL + "thumb/" + product.image}
               alt={product.title}
             />
           </Link>
@@ -35,27 +33,30 @@ const ProductCard = ({ product, endpoint = '/products' }) => {
           <MyAddToCartMini product={product} />
         </div>
         <Link href={`/products/${product.id}`}>
-          <div className="flex flex-col justify-between mt-1 lg:items-center lg:flex-row">
-            {product.discount != 0 && product.discount != null ? (
-              <p className="space-x-2 overflow-hidden text-lg text-gray-400 text-ellipsis">
-                <span className="line-through">{product.price} $</span>
-                <span className="text-red-500">
-                  {product.price - (product.discount / 100) * product.price} $
-                </span>
-              </p>
-            ) : (
-              <p className="max-w-full overflow-hidden text-lg font-bold text-red-500 text-ellipsis">
-                {product.price} $
-              </p>
-            )}
-            {/* <span className="flex">
+          {product.price > 0 && (
+            <div className="flex flex-col justify-between mt-1 lg:items-center lg:flex-row">
+              {product.discount != 0 && product.discount != null ? (
+                <p className="space-x-2 overflow-hidden text-lg text-gray-400 text-ellipsis">
+                  <span className="line-through">{product.price} $</span>
+                  <span className="text-red-500">
+                    {product.price - (product.discount / 100) * product.price} $
+                  </span>
+                </p>
+              ) : (
+                <p className="max-w-full overflow-hidden text-lg font-bold text-red-500 text-ellipsis">
+                  {product.price} $
+                </p>
+              )}
+              {/* <span className="flex">
             <Star className="h-4 text-yellow-400 fill-yellow-400" />
             <Star className="h-4 text-yellow-400 fill-yellow-400" />
             <Star className="h-4 text-yellow-400 fill-yellow-400" />
             <Star className="h-4 text-yellow-400 fill-yellow-400" />
             <Star className="h-4 text-gray-400" />
           </span> */}
-          </div>
+            </div>
+          )}
+
           <TooltipProvider delayDuration={0}>
             <Tooltip className="bg-blue-200">
               <TooltipTrigger className="w-full">

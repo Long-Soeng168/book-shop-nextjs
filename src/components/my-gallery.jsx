@@ -1,73 +1,69 @@
 "use client";
-
-import { useEffect, useState } from "react";
-import GLightbox from "glightbox";
-import "glightbox/dist/css/glightbox.min.css";
+import React, { useState } from "react";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css"; // Required styles
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails"; // Thumbnail plugin
+import "yet-another-react-lightbox/plugins/thumbnails.css"; // Thumbnail plugin styles
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
+import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Image from "next/image";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import MyCarouselButton from "./my-carousel-button";
-import { IMAGE_BOOK_URL } from "@/config/env";
 
-const MyGallery = ({ image = "", images = [] }) => {
-  const [isClient, setIsClient] = useState(false);
+// const images = [
+//   "/images/banners/banner3.png",
+//   "/images/banners/banner1.png",
+//   "/images/banners/banner2.png",
+// ];
 
-  useEffect(() => {
-    // Set client-only rendering after the initial render
-    setIsClient(true);
-  }, []);
-
-  useEffect(() => {
-    if (isClient) {
-      const lightbox = GLightbox({
-        touchNavigation: true,
-        loop: false,
-      });
-      return () => {
-        lightbox.destroy();
-      };
-    }
-  }, [isClient]);
-
-  if (!isClient) return null;
+const MyImageGallery = ({ images }) => {
+  const [open, setOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const slides = images.map((src) => ({ src })); // Convert images array to Lightbox format
 
   return (
-    <div className="max-w-[500px] mx-auto flex flex-col gap-4">
-      <a
-        href={IMAGE_BOOK_URL + image}
-        className="glightbox"
-        data-gallery="gallery"
-      >
+    <div>
+      {/* Large image at the top */}
+      <div className="w-full mb-2">
         <Image
           width={600}
           height={600}
-          className="w-full border-[0.5px] border-primary transition-transform duration-500 rounded-md cursor-pointer hover:scale-105"
-          src={IMAGE_BOOK_URL + 'thumb/' + image}
-          alt="Book Cover"
+          src={images[0]}
+          alt="Large Image"
+          className="object-cover w-full rounded-lg "
+          onClick={() => {
+            setCurrentIndex(0);
+            setOpen(true);
+          }}
         />
-      </a>
-      {images.length > 0 && (
-        <Carousel>
-          <CarouselContent>
-            {images.map((src, index) => (
-              <CarouselItem className="basis-1/4" key={index}>
-                <a href={IMAGE_BOOK_URL + src} className="glightbox" data-gallery="gallery">
-                  <Image
-                    width={100}
-                    height={100}
-                    className="w-full aspect-[1/1] border-[0.5px] border-primary hover:scale-95 transition-transform duration-500 ease-in-out object-contain p-0.5 rounded-md cursor-pointer"
-                    src={IMAGE_BOOK_URL + 'thumb/' + src}
-                    alt={`Thumbnail ${index + 1}`}
-                    loading="lazy" // Lazy load thumbnails
-                  />
-                </a>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <MyCarouselButton />
-        </Carousel>
-      )}
+      </div>
+
+      {/* Thumbnails for the rest of the images */}
+      <div className="grid grid-cols-4 gap-2">
+        {images.slice(1).map((photo, index) => (
+          <Image
+            width={600}
+            height={600}
+            key={index}
+            src={photo}
+            alt={`Image ${index + 2}`} // Adjusted index for thumbnails
+            className="object-cover w-full rounded-lg cursor-pointer aspect-square"
+            onClick={() => {
+              setCurrentIndex(index + 1); // Adjust index for thumbnails
+              setOpen(true);
+            }}
+          />
+        ))}
+      </div>
+
+      <Lightbox
+        open={open}
+        close={() => setOpen(false)}
+        slides={slides}
+        index={currentIndex}
+        plugins={[Thumbnails, Zoom, Slideshow, Fullscreen]}
+      />
     </div>
   );
 };
 
-export default MyGallery;
+export default MyImageGallery;

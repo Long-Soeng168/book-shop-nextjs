@@ -3,7 +3,6 @@ import MyHeader from "@/components/my-header";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 import ToTopButton from "@/components/ui/to-top-button";
 import { CartProvider } from "@/contexts/CartContext";
-import { Link } from "@/i18n/routing";
 import React, { Suspense } from "react";
 
 const ClientLayout = ({ children }) => {

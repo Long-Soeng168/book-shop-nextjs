@@ -86,7 +86,7 @@
   }
 }
 
-@layer base { img { display: initial; } }
+@layer base { img { display: initial } }
 
 .no-tailwind {
   @apply prose prose-gray dark:prose-invert max-w-none lg:prose-xl;

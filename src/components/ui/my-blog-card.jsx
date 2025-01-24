@@ -19,21 +19,21 @@ const MyBlogCard = async ({ blog }) => {
           src={IMAGE_BLOG_URL + blog.image}
           alt={'Image\'s ' + blog.name}
         />
-        <div className="my-4">
-          <h3 className="mb-2 text-xl font-bold text-foreground line-clamp-2">
+        <div className="m-2">
+          <h3 className="text-xl font-bold text-foreground line-clamp-2">
             {blog.name}
           </h3>
-          <p className="mb-2 text-background-foreground line-clamp-3">
+          {/* <p className="mb-2 text-background-foreground line-clamp-3">
             {blog.short_description}
-          </p>
+          </p> */}
           {/* <p className="mb-2 text-background-foreground line-clamp-3">
             CategoryId : {blog.news_category_id}
           </p> */}
         </div>
       </div>
       <div className="flex justify-end">
-        <Button variant="link" className="mt-2 text-lg text-primary">
-          {t('seeMore')}
+        <Button variant="link" className="text-lg text-primary">
+          {t('seeMore')} {'>'}
         </Button>
       </div>
     </Link>

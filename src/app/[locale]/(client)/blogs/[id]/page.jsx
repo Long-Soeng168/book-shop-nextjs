@@ -63,8 +63,8 @@ export default async function Page({ params }) {
         <article>
           {blog?.image && (
             <Image
-              width={1000}
-              height={1000}
+              width={600}
+              height={600}
               className="w-full rounded-md"
               src={IMAGE_BLOG_URL + blog.image}
               alt={"Image's " + blog.name}

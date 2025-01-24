@@ -2,8 +2,6 @@ import MySlideShow from "@/components/my-slide-show";
 import MyCategoryList from "@/components/my-category-list";
 import MyFeatureList from "@/components/my-feature-list";
 import NewArrivals from "@/components/homepage/new-arrivals";
-import { Suspense } from "react";
-import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 import BestSellings from "@/components/homepage/best-sellings";
 import Promotion from "@/components/homepage/promotion";
 import Blogs from "@/components/homepage/blogs";

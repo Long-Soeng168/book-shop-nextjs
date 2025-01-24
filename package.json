@@ -50,7 +50,8 @@
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "use-debounce": "^10.0.4",
-    "vaul": "^1.1.2"
+    "vaul": "^1.1.2",
+    "yet-another-react-lightbox": "^3.21.7"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",

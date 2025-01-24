@@ -8,48 +8,55 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const AdminLayout = ({ children }) => {
-  const token = localStorage.getItem("token");
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkAuthentication = async () => {
-      const isAuthenticated = !!token;
-      if (isAuthenticated) {
-        const url = `${BASE_API_URL}/user`;
-        try {
-          const response = await fetch(url, {
-            method: "GET", // Correct HTTP method
-            headers: {
-              Authorization: `Bearer ${token}`, // Proper Authorization header
-            },
-          });
+      // Ensure this runs only on the client side
+      if (typeof window === "undefined") {
+        setLoading(false);
+        return;
+      }
 
-          if (!response.ok) {
-            throw new Error(`Failed to fetch user: ${response.statusText}`);
-          }
-          const result = await response.json();
-          if (result.isSuccess) {
-            setLoading(false);
-          } else {
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
-            router.push("/login");
-          }
-        } catch (error) {
-          // Handle error (e.g., network issues or server errors)
-          console.error("Error fetching user:", error);
-          localStorage.removeItem("token");
-          localStorage.removeItem("user");
-          router.push("/login");
+      const token = localStorage.getItem("token");
+      const isAuthenticated = !!token;
+
+      if (!isAuthenticated) {
+        setLoading(false);
+        router.push("/login");
+        return;
+      }
+
+      try {
+        const url = `${BASE_API_URL}/user`;
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch user: ${response.statusText}`);
         }
-      } else {
+
+        const result = await response.json();
+
+        if (result.isSuccess) {
+          setLoading(false);
+        } else {
+          throw new Error("User data is not valid");
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        setLoading(false);
         router.push("/login");
       }
     };
 
     checkAuthentication();
-  }, [token, router]);
+  }, [router]);
 
   return loading ? (
     <MyLoadingAnimation />

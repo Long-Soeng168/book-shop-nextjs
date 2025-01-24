@@ -58,7 +58,7 @@ export function Holds() {
   const [holds, setHolds] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(true);
   const [selectedForView, setSelectedForView] = React.useState(false);
 
   const [isDrawerDetailHoldOpen, setIsDrawerDetailHoldOpen] =

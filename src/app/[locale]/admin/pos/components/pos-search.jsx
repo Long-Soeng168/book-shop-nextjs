@@ -34,13 +34,13 @@ export default function POSSearch({ placeholder }) {
             handleSearch(e.target.value);
           }}
           defaultValue={searchParams.get("search")?.toString()}
-          className="w-full h-full pl-12 pr-24 border-0 border-l rounded-none rounded-tr-lg rounded-br-lg border-primary focus-visible:ring-primary focus-visible:ring-2"
+          className="w-full h-full py-3 pl-12 pr-24 border-0 rounded-lg rounded-tr-lg rounded-br-lg border-primary focus-visible:ring-primary focus-visible:ring-2"
           type="search"
           id="default-search"
           placeholder="Search Items..."
         />
         {/* Error here <button> tag */}
-        <Button className="absolute right-1 top-1/2 -translate-y-[50%]">
+        <Button type='button' className="absolute right-1 top-1/2 -translate-y-[50%]">
           Search
         </Button>
       </div>

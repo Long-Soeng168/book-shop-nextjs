@@ -27,7 +27,7 @@ const POSHeader = ({ customers, payments }) => {
             <div className="flex-1">
               <form className="relative w-full ">
                 <div className="flex items-stretch bg-white border-[0.5px] border-primary rounded-lg">
-                  <Select defaultValue="products">
+                  {/* <Select defaultValue="products">
                     <SelectTrigger className="w-auto h-full py-3 font-semibold border-none rounded-lg outline-none focus:ring-0">
                       <SelectValue placeholder="Item Type" />
                     </SelectTrigger>
@@ -35,7 +35,7 @@ const POSHeader = ({ customers, payments }) => {
                       <SelectItem value="products">Products</SelectItem>
                       <SelectItem value="services">Services</SelectItem>
                     </SelectContent>
-                  </Select>
+                  </Select> */}
                   <POSSearch />
                 </div>
               </form>
@@ -45,7 +45,6 @@ const POSHeader = ({ customers, payments }) => {
           <div className="flex items-center justify-between w-full gap-2 md:w-auto md:order-3">
             <POSHeaderMenu className="lg:hidden" />
             <div className="flex items-center gap-2">
-             
               <Holds />
               <OrderButton customers={customers} payments={payments} />
             </div>

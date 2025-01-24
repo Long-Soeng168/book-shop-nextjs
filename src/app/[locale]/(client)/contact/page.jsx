@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { getContact } from "@/services/page-services";
 import { getTranslations } from "next-intl/server";
 import ScrollToTop from "@/components/scroll-to-top";
+import ContactForm from "@/components/contact-form";
 
 export async function generateMetadata() {
   let contact = await getContact();
@@ -77,78 +78,8 @@ const ContactPage = async () => {
         <h2 className="mb-4 text-3xl font-semibold text-center text-gray-800 dark:text-white">
           {t("sendUsAMessage")}
         </h2>
-        <form className="space-y-6">
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-            >
-              {t("name")}
-            </label>
-            <input
-              type="text"
-              id="name"
-              className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              placeholder={t("name")}
-              required
-            />
-          </div>
 
-          {/* <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-            >
-              {t("email")}
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              placeholder={t("email")}
-              required
-            />
-          </div> */}
-
-          <div>
-            <label
-              htmlFor="phone"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-            >
-              {t("phone")}
-            </label>
-            <input
-              type="text"
-              id="phone"
-              className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              placeholder={t("phone")}
-              required
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="message"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-            >
-              {t("message")}
-            </label>
-            <textarea
-              id="message"
-              className="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-              placeholder={t("message")}
-              rows="4"
-              required
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full px-4 py-2 transition-all duration-500 rounded-md shadow text-primary-foreground bg-primary hover:scale-105 focus:outline-none"
-          >
-            {t("sendMessage")}
-          </button>
-        </form>
+        <ContactForm />
       </div>
     </div>
   );

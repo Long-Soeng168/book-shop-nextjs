@@ -14,8 +14,6 @@ import { notFound } from "next/navigation";
 import { IMAGE_BOOK_URL } from "@/config/env";
 import ScrollToTop from "@/components/scroll-to-top";
 import MyReadPdfButton from "@/components/my-read-pdf-button";
-// import BestSelling from "./components/best-selling";
-// import Categories from "./components/categories";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -36,44 +34,27 @@ const ProductPage = async ({ params }) => {
   const t = await getTranslations("Index");
   const { id } = await params;
   const product = await getBook({ id: id });
-  const image = product?.image;
+  const image = IMAGE_BOOK_URL + product?.image;
 
   let images = [];
   if (product?.images?.length > 0) {
-    images = product?.images.map((item) => item.image);
+    images = product?.images.map((item) => IMAGE_BOOK_URL + item.image);
   }
 
   if (product == 404) {
     notFound();
   }
 
-
   return (
     <div className="lg:flex">
       <ScrollToTop />
-      {/* <aside className="flex-col hidden px-2 py-4 -translate-x-2 lg:flex bg-primary/5">
-        <Categories />
-        <hr className="my-6" />
-        <Label className="text-primary">Best Selling</Label>
-        <BestSelling />
-      </aside> */}
-      <main className="w-full lg:flex-1">
+      <div className="w-full lg:flex-1">
         <div className="grid w-full grid-cols-12 gap-2 mx-auto mt-8 ">
           <div className="col-span-12 mx-6 mb-6 md:col-span-4 md:px-0">
             <div className="pb-4 ">
-              <MyGallery image={image} images={images} />
+              <MyGallery images={[image, ...images]} />
             </div>
-            {product?.file && (
-              // <a
-              //   href={`https://admin.thnal.org/assets/pdf/books/${product?.file}`}
-              //   className="mt-8"
-              // >
-              //   <Button className="w-full" variant="destructive">
-              //     <BookOpenTextIcon /> Read
-              //   </Button>
-              // </a>
-              <MyReadPdfButton product={product} />
-            )}
+            {product?.file && <MyReadPdfButton product={product} />}
           </div>
 
           {/* Right Item */}
@@ -132,15 +113,6 @@ const ProductPage = async ({ params }) => {
                     )}
                   </MyKeyValueCard>
                 )}
-
-                {/* {product?.publication_date && (
-                  <MyKeyValueCard
-                    title="Publication Date"
-                    value={moment(product?.publication_date).format(
-                      "D - MMMM - YYYY"
-                    )}
-                  />
-                )} */}
                 {product?.year && (
                   <MyKeyValueCard
                     title={t("publishedYear")}
@@ -191,57 +163,38 @@ const ProductPage = async ({ params }) => {
                 )}
               </div>
             </div>
-            <div className="my-4">
-              {product?.discount != 0 ? (
-                <p className="space-x-4 text-2xl font-semibold text-gray-400 dark:text-white">
-                  <span className="line-through">{product?.price} $</span>
-                  <span className="text-red-500">
-                    {product?.price -
-                      (product?.discount / 100) * product?.price}{" "}
-                    $
-                  </span>
-                </p>
-              ) : (
-                <p className="text-2xl font-semibold text-red-500">
-                  {product?.price} $
-                </p>
-              )}
-            </div>
-            <div>
+            {product?.price > 0 && (
+              <div className="my-4">
+                {product?.discount != 0 ? (
+                  <p className="space-x-4 text-2xl font-semibold text-gray-400 dark:text-white">
+                    <span className="line-through">{product?.price} $</span>
+                    <span className="text-red-500">
+                      {product?.price -
+                        (product?.discount / 100) * product?.price}{" "}
+                      $
+                    </span>
+                  </p>
+                ) : (
+                  <p className="text-2xl font-semibold text-red-500">
+                    {product?.price} $
+                  </p>
+                )}
+              </div>
+            )}
+
+            {product?.price > 0 && (
               <div className="flex items-center gap-4">
-                {/* Quantity Control */}
-                {/* <div className="flex items-center">
-                  <Button
-                    variant="outline"
-                    className="rounded-tr-none rounded-br-none"
-                  >
-                    <Minus className="text-primary" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="px-6 font-bold rounded-none cursor-auto border-x-0"
-                  >
-                    1
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="rounded-tl-none rounded-bl-none"
-                  >
-                    <Plus className="text-primary" />
-                  </Button>
-                </div> */}
-                {/* Add to Cart Button */}
                 <MyBuyNowButton product={product} />
                 <MyAddToCart product={product} />
               </div>
-            </div>
+            )}
           </div>
         </div>
 
         <Suspense key={product?.category_id} fallback={<MyLoadingAnimation />}>
           <RelatedProducts categoryId={product?.category_id} />
         </Suspense>
-      </main>
+      </div>
     </div>
   );
 };

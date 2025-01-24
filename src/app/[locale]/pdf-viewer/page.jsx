@@ -15,7 +15,7 @@ const Page = () => {
 
     const url = localStorage.getItem("pdfUrl");
     setPdfUrl(url);
-    console.log(url);
+    // console.log(url);
   }, []);
 
   if (!isClient) {
