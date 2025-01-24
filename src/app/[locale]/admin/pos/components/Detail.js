@@ -289,7 +289,7 @@ export default function Detail({ payments, customers }) {
 
   return (
     <>
-      <section className="sticky top-0 flex flex-col h-[95vh] md:h-screen">
+      <section className="sticky top-0 flex flex-col h-[90vh] md:h-screen">
         <h2 className="w-full p-2 text-lg font-bold text-center">
           Order Details
         </h2>
