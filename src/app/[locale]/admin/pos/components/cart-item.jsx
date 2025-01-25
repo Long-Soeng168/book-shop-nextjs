@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { IMAGE_BOOK_URL } from "@/config/env";
 import { usePOSCart } from "@/contexts/POSContext";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { ImageIcon, Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -16,13 +16,19 @@ const CartItem = ({ item, isReadOnly = false }) => {
     <tr className="relative group">
       <td>
         <span className="relative flex shrink-0 overflow-hidden border-[0.5px] rounded-sm w-16 h-16 m-1">
-          <Image
-            className="object-cover w-full h-full rounded-sm aspect-square"
-            height={100}
-            width={100}
-            alt=""
-            src={`${IMAGE_BOOK_URL}thumb/${item.image}`}
-          />
+          {item.image ? (
+            <Image
+              className="object-cover w-full h-full rounded-sm aspect-square"
+              height={100}
+              width={100}
+              alt=""
+              src={`${IMAGE_BOOK_URL}thumb/${item.image}`}
+            />
+          ) : (
+            <div className="flex items-center justify-center w-full border rounded-sm bg-secondary aspect-square">
+              <ImageIcon size={50} className="text-border" />
+            </div>
+          )}
         </span>
       </td>
       <td>
@@ -51,7 +57,7 @@ const CartItem = ({ item, isReadOnly = false }) => {
               <Minus />
             </Button>
           )}
-          <p className="mx-2 text-base text-black">{item.quantity}</p>
+          <p className="mx-2 text-base text-foreground">{item.quantity}</p>
           {!isReadOnly && (
             <Button
               onClick={() => handleQuantityChange(item.id, +1)}

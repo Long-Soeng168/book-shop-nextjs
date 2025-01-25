@@ -1,5 +1,6 @@
 import {
   APP_EMAIL,
+  APP_LOGO,
   APP_NAME_KH,
   APP_PAYMENT_MAYTHOD,
   APP_WEBSITE,
@@ -25,7 +26,7 @@ const InvoiceA4 = ({
             alt=""
             width={300}
             height={300}
-            src={`/images/app_logo.png`}
+            src={APP_LOGO}
             className="object-contain w-48 h-full"
           />
           <div className="flex flex-col justify-center h-full text-start">

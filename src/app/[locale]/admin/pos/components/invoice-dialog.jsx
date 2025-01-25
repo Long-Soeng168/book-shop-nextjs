@@ -102,7 +102,7 @@ const InvoiceDialog = () => {
           <div className="flex justify-end gap-2">
             <Button
               variant="secondary"
-              className="bg-gray-100"
+              className="bg-secondary"
               onClick={() => setIsOpenInvoiceDialog(false)}
             >
               Cancel
@@ -120,7 +120,7 @@ const InvoiceDialog = () => {
             <button
               size="icon"
               onClick={() => setPrintSize("80")}
-              className={`px-1 text-sm ${
+              className={`px-1 text-sm border ${
                 printSize == "80"
                   ? "text-gray-100 bg-black"
                   : "text-gray-950 bg-gray-200"
@@ -131,7 +131,7 @@ const InvoiceDialog = () => {
             <button
               size="icon"
               onClick={() => setPrintSize("a4")}
-              className={`px-1 text-sm ${
+              className={`px-1 text-sm border ${
                 printSize == "a4"
                   ? "text-gray-100 bg-black"
                   : "text-gray-950 bg-gray-200"
@@ -143,7 +143,7 @@ const InvoiceDialog = () => {
               <button
                 size="icon"
                 onClick={() => setPrintSize("quote")}
-                className={`px-1 text-sm ${
+                className={`px-1 text-sm border ${
                   printSize == "quote"
                     ? "text-gray-100 bg-black"
                     : "text-gray-950 bg-gray-200"

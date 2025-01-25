@@ -1,4 +1,5 @@
 "use client";
+import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,7 +10,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { BASE_API_URL, BASE_BACKEND_URL } from "@/config/env";
-import { AlignLeft, Layout, LogOut, PanelsTopLeft, PanelTop } from "lucide-react";
+import {
+  AlignLeft,
+  Layout,
+  LogOut,
+  PanelsTopLeft,
+  PanelTop,
+} from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -61,7 +68,11 @@ const POSHeaderMenu = ({ className }) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="max-w-48">
-          <DropdownMenuLabel>Menu</DropdownMenuLabel>
+          <DropdownMenuLabel>
+            <span className="flex items-center justify-between w-full">
+              Toggle Mode <ModeToggle />
+            </span>
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Link href={`/`} className="flex items-center gap-1">
@@ -77,6 +88,7 @@ const POSHeaderMenu = ({ className }) => {
           </DropdownMenuItem>
 
           <DropdownMenuSeparator />
+
           <DropdownMenuItem>
             <div>
               <p className="font-semibold line-clamp-1">{user.name}</p>

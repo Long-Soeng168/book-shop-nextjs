@@ -6,6 +6,7 @@ import LottieAnimation from "../../../../../components/ui/lottie-animation";
 import animationData from "/public/images/animations/success-animation2.json";
 import { usePOSCart } from "@/contexts/POSContext";
 import { IMAGE_BOOK_URL } from "@/config/env";
+import { ImageDown, ImageIcon, ImageOff } from "lucide-react";
 
 export default function Card({ product }) {
   const { addToCart, cartItems } = usePOSCart();
@@ -51,13 +52,20 @@ export default function Card({ product }) {
       } `}
     >
       <div className="relative w-full">
-        <Image
-          className=" w-full rounded-tl-sm rounded-tr-sm h-full aspect-[1/1] object-cover"
-          src={`${IMAGE_BOOK_URL}thumb/${product.image}`}
-          alt={product.title || "Product Image"}
-          width={100}
-          height={100}
-        />
+        {product.image ? (
+          <Image
+            className=" w-full rounded-tl-sm rounded-tr-sm h-full aspect-[1/1] object-cover"
+            src={`${IMAGE_BOOK_URL}thumb/${product.image}`}
+            alt={product.title || "Product Image"}
+            width={100}
+            height={100}
+          />
+        ) : (
+          <div className="flex items-center justify-center w-full border rounded-sm bg-secondary aspect-square">
+            <ImageIcon size={50} className="text-border" />
+          </div>
+        )}
+
         {hasDiscount && (
           <span className="absolute px-1.5 font-bold text-sm rounded-sm text-white bottom-1.5 left-1.5 bg-real_primary/80">
             - {product.discount}%

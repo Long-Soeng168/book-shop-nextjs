@@ -6,8 +6,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 import { Kantumruy_Pro } from "next/font/google";
-import { APP_URL } from "@/config/env";
-import Script from "next/script";
+import { APP_FAVICON } from "@/config/website-detail";
 
 const kantumruyPro = Kantumruy_Pro({
   weight: ["100", "200", "300", "400", "500", "600", "700"],
@@ -16,7 +15,7 @@ const kantumruyPro = Kantumruy_Pro({
 
 export const metadata = {
   icons: {
-    icon: `${APP_URL}images/app_logo.png`,
+    icon: `${APP_FAVICON}`,
   },
 };
 

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import {
   APP_EMAIL,
+  APP_LOGO,
   APP_NAME_KH,
   APP_PAYMENT_MAYTHOD,
   APP_WEBSITE,
@@ -25,7 +26,7 @@ const Invoice80mm = ({
             alt="App Logo"
             width={60}
             height={60}
-            src={`/images/app_logo.png`}
+            src={APP_LOGO}
             className="object-contain w-10 h-10"
           />
           <div className="flex flex-col justify-center text-start">

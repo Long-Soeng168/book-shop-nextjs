@@ -165,7 +165,7 @@ export function Holds() {
                   {holds?.map((hold, index) => (
                     <div
                       key={hold.id}
-                      className="flex flex-col justify-between h-full gap-2 p-3 bg-gray-100 rounded-md "
+                      className="flex flex-col justify-between h-full gap-2 p-3 border rounded-md bg-background"
                     >
                       <div className="text-base">
                         <span className="text-xl font-bold">#{hold.id}</span>

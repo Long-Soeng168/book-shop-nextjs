@@ -449,7 +449,7 @@ export default function Detail({ payments, customers }) {
                   <DialogDescription />
                 </DialogHeader>
                 <>
-                  <div className="max-w-full px-4 py-2 text-center bg-gray-200 rounded-lg">
+                  <div className="max-w-full px-4 py-2 text-center rounded-lg bg-secondary">
                     <div className="flex items-end gap-2 py-2 text-lg rounded-lg text-primary ">
                       <p>Total ($) : </p>{" "}
                       <p className="text-3xl">
@@ -470,7 +470,7 @@ export default function Detail({ payments, customers }) {
                     </div>
                   </div>
                   {/* Payment Method */}
-                  <div className="flex items-center justify-between mt-4 font-semibold text-gray-700 text-start">
+                  <div className="flex items-center justify-between mt-4 font-semibold text-secondary-foreground text-start">
                     <span>Payment Method</span>
                     {/* <div>
                       (Customer Credit :{" "}
@@ -577,10 +577,10 @@ export default function Detail({ payments, customers }) {
                     {/* Return Amount */}
 
                     <div className="w-full mt-6">
-                      <div className="w-full h-auto p-2 bg-gray-200 rounded-lg">
+                      <div className="w-full h-auto p-2 rounded-lg bg-secondary">
                         <label
                           htmlFor="received-dollar"
-                          className="block text-black text-[16px] font-medium mb-1 text-start"
+                          className="block text-secondary-foreground text-[16px] font-medium mb-1 text-start"
                         >
                           Return Change
                         </label>
@@ -605,7 +605,7 @@ export default function Detail({ payments, customers }) {
                     <ShadCNButton
                       size="mySize"
                       variant="myStyle"
-                      className="w-full p-2 mt-4 mb-2 text-white bg-gray-600 rounded-lg cursor-not-allowed hover:bg-primary/90"
+                      className="w-full p-2 mt-4 mb-2 bg-gray-600 rounded-lg cursor-not-allowed text-primary-foreground hover:bg-primary/90"
                     >
                       <RotateCw className=" animate-spin" /> Submiting...
                     </ShadCNButton>
@@ -614,7 +614,7 @@ export default function Detail({ payments, customers }) {
                       onClick={handleSubmit}
                       size="mySize"
                       variant="myStyle"
-                      className="w-full p-2 mt-4 mb-2 text-white rounded-lg bg-primary hover:bg-primary/90"
+                      className="w-full p-2 mt-4 mb-2 rounded-lg text-primary-foreground bg-primary hover:bg-primary/90"
                     >
                       <CheckCircle /> Submit
                     </ShadCNButton>

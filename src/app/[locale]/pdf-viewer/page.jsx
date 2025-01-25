@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import MySearch from "@/components/ui/my-search";
 import { notFound } from "next/navigation";
+import { APP_LOGO } from "@/config/website-detail";
 
 const Page = () => {
   const [isClient, setIsClient] = useState(false);
@@ -34,7 +35,7 @@ const Page = () => {
         <Link href="/" className="flex items-center gap-2 overflow-hidden">
           <Image
             className="object-contain rounded-md"
-            src="/images/app_logo.png"
+            src={APP_LOGO}
             width={35}
             height={35}
             alt="Logo Image"

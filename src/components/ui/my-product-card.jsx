@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/tooltip";
 import { IMAGE_BOOK_URL } from "@/config/env";
 import MyAddToCartMini from "../my-add-to-cart-mini";
+import { ImageIcon } from "lucide-react";
 
 const ProductCard = ({ product, endpoint = "/products" }) => {
   return (
@@ -17,13 +18,19 @@ const ProductCard = ({ product, endpoint = "/products" }) => {
       <div>
         <div className="relative mb-1 overflow-hidden">
           <Link href={`${endpoint}/${product.id}`}>
-            <Image
-              width={600}
-              height={600}
-              className="object-cover w-full border-[0.5px] border-primary rounded-md aspect-[6/9] font-moul"
-              src={IMAGE_BOOK_URL + "thumb/" + product.image}
-              alt={product.title}
-            />
+            {product.image ? (
+              <Image
+                width={600}
+                height={600}
+                className="object-cover w-full border-[0.5px] border-primary rounded-md aspect-[6/9] font-moul"
+                src={IMAGE_BOOK_URL + "thumb/" + product.image}
+                alt={product.title}
+              />
+            ) : (
+              <div className="flex items-center justify-center w-full border rounded-sm bg-secondary aspect-[6/9]">
+                <ImageIcon size={72} className="text-border" />
+              </div>
+            )}
           </Link>
           {product.discount != 0 && product.discount != null && (
             <span className="absolute px-1.5 font-bold text-lg rounded-sm text-white bottom-1.5 left-1.5 bg-real_primary/80">

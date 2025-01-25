@@ -15,6 +15,7 @@ import MyHomeModal from "./my-home-modal";
 import { User2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { BASE_BACKEND_URL } from "@/config/env";
+import { APP_LOGO } from "@/config/website-detail";
 
 const MyHeader = async () => {
   const resultCateogries = await getCategories({
@@ -33,7 +34,7 @@ const MyHeader = async () => {
           <Link href="/" className="flex items-center gap-2 overflow-hidden">
             <Image
               className="object-contain rounded-md"
-              src="/images/app_logo.png"
+              src={APP_LOGO}
               width={60}
               height={60}
               alt="Logo Image"

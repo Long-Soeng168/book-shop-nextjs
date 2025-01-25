@@ -7,40 +7,30 @@ import Promotion from "@/components/homepage/promotion";
 import Blogs from "@/components/homepage/blogs";
 import { APP_URL } from "@/config/env";
 import ScrollToTop from "@/components/scroll-to-top";
+import { APP_DESCRIPTION, APP_KEYWORD, APP_LOGO, APP_TITLE } from "@/config/website-detail";
 
 export const metadata = {
-  title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
-  description:
-    "Discover Thnal, Cambodia's online book shop! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks.",
-  keywords: [
-    "Online book shop Cambodia",
-    "Cambodian bookshop platform",
-    "Authors and publishers selling books",
-    "eBooks and audiobooks Cambodia",
-    "Sell books online Cambodia",
-  ],
+  title: APP_TITLE ,
+  description: APP_DESCRIPTION ,
+  keywords: APP_KEYWORD ,
   openGraph: {
-    title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
-    description:
-      "Discover Thnal, Cambodia's online book shop! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
-    url: `${APP_URL}`, // replace with the actual Thnal URL
+    title: APP_TITLE,
+    description: APP_DESCRIPTION,
+    url: APP_URL, // replace with the actual Thnal URL
     type: "website",
     images: [
       {
-        url: `${APP_URL}images/app_logo.png`, // replace with the actual image URL
+        url: APP_LOGO, // replace with the actual image URL
         width: 500,
         height: 500,
-        alt: "Thnal Cambodia's Leading Bookshop",
+        alt: APP_TITLE,
       },
     ],
   },
   twitter: {
-    card: `${APP_URL}images/app_logo.png`,
-    title: "Thnal | Cambodia's Leading Bookshop & Publishing Platform",
-    description:
-      "Discover Thnal, Cambodia's premier online book marketplace! Authors, publishers, & bookshops sell & distribute books, eBooks, audiobooks, & get ISBNs easily.",
-    site: "@Thnal_com",
-    creator: "@Thnal_com",
+    card: APP_LOGO,
+    title: APP_TITLE ,
+    description: APP_DESCRIPTION,
   },
 };
 
