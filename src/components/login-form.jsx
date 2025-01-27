@@ -15,8 +15,8 @@ const validateForm = (email, password) => {
 };
 
 export function LoginForm({ className, ...props }) {
-  const [email, setEmail] = useState("superadmin@gmail.com");
-  const [password, setPassword] = useState("superadmin_user_@password");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [baseUrl, setBaseUrl] = useState("");

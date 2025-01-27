@@ -1,5 +1,5 @@
 import { LoginForm } from "@/components/login-form";
-import { APP_LOGO } from "@/config/website-detail";
+import { APP_LOGO, APP_NAME } from "@/config/website-detail";
 import Image from "next/image";
 
 export default function LoginPage() {
@@ -17,7 +17,7 @@ export default function LoginPage() {
                 className="inset-0 object-cover dark:brightness-[0.2] dark:grayscale"
               />
             </div>
-            Thnal.org
+            { APP_NAME }
           </a>
         </div>
         <div className="flex items-center justify-center flex-1">
