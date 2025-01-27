@@ -5,6 +5,7 @@ const APP_DESCRIPTION = "Discover Thnal, Cambodia's online book shop! Authors, p
 const APP_KEYWORD = "Online book shop Cambodia, Cambodian bookshop platform, Authors and publishers selling books, eBooks and audiobooks Cambodia, Sell books online Cambodia,";
 
 const APP_ADDRESS = "#123, St 456, Sangkat Toul Kork, Khan Toul Kork";
+const APP_TELEGRAM = "https://t.me/OBOCCambodia";
 const APP_EMAIL = "scholarbookkh@gmail.com";
 const APP_WEBSITE = "https://books.scholarlibrary.com";
 const APP_LOGO = "https://admin.thnal.org/assets/images/website_infos/logo.png";
@@ -32,6 +33,7 @@ export {
   APP_LOGO,
   APP_FAVICON,
   APP_ADDRESS,
+  APP_TELEGRAM,
   APP_EMAIL,
   APP_CONTACT,
   APP_PAYMENT_MAYTHOD,

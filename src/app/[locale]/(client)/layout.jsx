@@ -1,6 +1,7 @@
 import MyFooter from "@/components/my-footer";
 import MyHeader from "@/components/my-header";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
+import TelegramButton from "@/components/ui/telegram-button";
 import ToTopButton from "@/components/ui/to-top-button";
 import { CartProvider } from "@/contexts/CartContext";
 import React, { Suspense } from "react";
@@ -20,6 +21,7 @@ const ClientLayout = ({ children }) => {
           {children}
         </div>
         <ToTopButton />
+        <TelegramButton />
         <MyFooter />
       </CartProvider>
       {/* <div className="flex">

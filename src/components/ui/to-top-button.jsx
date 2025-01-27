@@ -45,8 +45,8 @@ export default function ToTopButton() {
           onClick={scrollToTop}
           style={{
             position: "fixed",
-            bottom: "20px",
-            right: "20px",
+            bottom: "90px",
+            right: "25px",
             zIndex: 1000,
             transition: "opacity 0.3s ease-in-out",
           }}
