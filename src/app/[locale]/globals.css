@@ -100,8 +100,14 @@
 .rpv-toolbar__item button[aria-label="Download"] {
   display: none;
 }
+.rpv-toolbar__item button[aria-label="Print"] {
+  display: none;
+}
 
 .rpv-core__display--block.rpv-core__display--hidden-medium button[data-testid="get-file__download-menu"] {
+  display: none;
+}
+.rpv-core__display--block.rpv-core__display--hidden-medium button[data-testid="print__menu"] {
   display: none;
 }
 
@@ -161,3 +167,18 @@
     font-size: 8px;
   }
 } */
+
+
+.no-copy {
+  user-select: none; /* Disable text selection */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+}
+
+.yarl__thumbnails_thumbnail_active {
+  border: 2px solid white !important;
+  transform: scale(1.1) !important;
+  transition: transform 0.3s ease, border-color 0.3s ease; 
+}
+

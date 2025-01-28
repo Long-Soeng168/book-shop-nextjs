@@ -8,6 +8,13 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Image from "next/image";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./ui/carousel";
 
 // const images = [
 //   "/images/banners/banner3.png",
@@ -29,7 +36,7 @@ const MyImageGallery = ({ images }) => {
           height={600}
           src={images[0]}
           alt="Large Image"
-          className="object-cover w-full rounded-lg "
+          className="object-cover w-full transition-all duration-300 rounded-lg cursor-pointer hover:scale-95"
           onClick={() => {
             setCurrentIndex(0);
             setOpen(true);
@@ -38,22 +45,34 @@ const MyImageGallery = ({ images }) => {
       </div>
 
       {/* Thumbnails for the rest of the images */}
-      <div className="grid grid-cols-4 gap-2">
-        {images.slice(1).map((photo, index) => (
-          <Image
-            width={600}
-            height={600}
-            key={index}
-            src={photo}
-            alt={`Image ${index + 2}`} // Adjusted index for thumbnails
-            className="object-cover w-full rounded-lg cursor-pointer aspect-square"
-            onClick={() => {
-              setCurrentIndex(index + 1); // Adjust index for thumbnails
-              setOpen(true);
-            }}
-          />
-        ))}
-      </div>
+      <Carousel className="mt-2 lg:mt-4">
+        <CarouselContent>
+          {images.slice(1).map((photo, index) => (
+            <CarouselItem
+              key={index}
+              className="pl-2 basis-1/3"
+            >
+              <Image
+                width={600}
+                height={600}
+                src={photo}
+                alt={`Image ${index + 2}`} // Adjusted index for thumbnails
+                className="object-cover w-full transition-all duration-300 border rounded-lg cursor-pointer hover:scale-95 border-primary/20 aspect-square"
+                onClick={() => {
+                  setCurrentIndex(index + 1); // Adjust index for thumbnails
+                  setOpen(true);
+                }}
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        {images.slice(1).length > 3 && (
+          <>
+            <CarouselPrevious className="-left-4" />
+            <CarouselNext className="-right-4" />
+          </>
+        )}
+      </Carousel>
 
       <Lightbox
         open={open}
@@ -61,6 +80,7 @@ const MyImageGallery = ({ images }) => {
         slides={slides}
         index={currentIndex}
         plugins={[Thumbnails, Zoom, Slideshow, Fullscreen]}
+        carousel={{ finite: true }}
       />
     </div>
   );

@@ -11,9 +11,10 @@ import MyBuyNowButton from "@/components/my-buy-now-button";
 import RelatedProducts from "./components/related-products";
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { IMAGE_BOOK_URL } from "@/config/env";
+import { BASE_API_URL, IMAGE_BOOK_URL } from "@/config/env";
 import ScrollToTop from "@/components/scroll-to-top";
 import MyReadPdfButton from "@/components/my-read-pdf-button";
+import { EyeIcon } from "lucide-react";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: product.title,
       description: product.short_description,
-      images: [`${IMAGE_BOOK_URL + "thumb/" + product.image}`],
+      images: [`${IMAGE_BOOK_URL + product.image}`],
     },
   };
 }
@@ -38,12 +39,33 @@ const ProductPage = async ({ params }) => {
 
   let images = [];
   if (product?.images?.length > 0) {
-    images = product?.images.map((item) => IMAGE_BOOK_URL + item.image);
+    images = product?.images.map(
+      (item) => IMAGE_BOOK_URL + item.image
+    );
   }
 
   if (product == 404) {
     notFound();
   }
+
+  async function getBook() {
+    const url = BASE_API_URL + `/books/${id}`;
+    try {
+      const response = await fetch(url, {
+        next: {
+          revalidate: 5,
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch Book : ${response.statusText}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.log(error.message);
+      return null;
+    }
+  }
+  getBook();
 
   return (
     <div className="lg:flex">
@@ -58,12 +80,13 @@ const ProductPage = async ({ params }) => {
           </div>
 
           {/* Right Item */}
-          <div className="col-span-12 md:col-span-8">
+          <div className="col-span-12 md:col-span-8 no-copy">
             <h1 className="block mt-1 mb-2 text-2xl leading-tight font-lg">
               {product?.title}
             </h1>
-            <MyShowMoreText maxLine={2} text={product?.short_description} />
-            <hr className="w-full my-6" />
+            <div className="flex gap-2 text-gray-400 dark:text-white">
+              <EyeIcon /> {product?.view_count}
+            </div>
             <div className="flex flex-col gap-6 my-6">
               <div className="flex flex-col gap-2">
                 {product?.author && (
@@ -145,7 +168,7 @@ const ProductPage = async ({ params }) => {
                     }
                   />
                 )}
-                {product?.created_at && (
+                {/* {product?.created_at && (
                   <MyKeyValueCard
                     title={t("postDate")}
                     value={moment(product?.created_at).format(
@@ -160,7 +183,7 @@ const ProductPage = async ({ params }) => {
                       "D - MMMM - YYYY"
                     )}
                   />
-                )}
+                )} */}
               </div>
             </div>
             {product?.price > 0 && (
@@ -183,13 +206,25 @@ const ProductPage = async ({ params }) => {
             )}
 
             {product?.price > 0 && (
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 mb-8">
                 <MyBuyNowButton product={product} />
                 <MyAddToCart product={product} />
               </div>
             )}
+
+            {product?.short_description && (
+              <div className="no-copy">
+                <MyShowMoreText maxLine={4} text={product?.short_description} />
+                <hr className="w-full my-8" />
+              </div>
+            )}
           </div>
         </div>
+        <MyShowMoreText
+          maxLine={10}
+          text={product?.description}
+          is_scroll={true}
+        />
 
         <Suspense key={product?.category_id} fallback={<MyLoadingAnimation />}>
           <RelatedProducts categoryId={product?.category_id} />

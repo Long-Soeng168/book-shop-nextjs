@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import MySearch from "@/components/ui/my-search";
 import { notFound } from "next/navigation";
-import { APP_LOGO } from "@/config/website-detail";
+import { APP_LOGO, APP_NAME } from "@/config/website-detail";
 
 const Page = () => {
   const [isClient, setIsClient] = useState(false);
@@ -41,7 +41,7 @@ const Page = () => {
             alt="Logo Image"
           />
           <p className="text-2xl font-bold max-w-26 text-foreground/80">
-            Thnal
+            {APP_NAME}
           </p>
         </Link>
         <MySearch />
