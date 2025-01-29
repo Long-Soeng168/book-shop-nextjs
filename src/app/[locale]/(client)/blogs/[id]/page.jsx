@@ -5,6 +5,7 @@ import {
   getBlogCategories,
   getBlogs,
 } from "@/services/blogs-services";
+import { EyeIcon } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
@@ -55,6 +56,9 @@ export default async function Page({ params }) {
                   month: "long",
                   day: "numeric",
                 })}
+            </div>
+            <div className="flex gap-2 text-gray-400 dark:text-white">
+              <EyeIcon /> {blog?.view_count}
             </div>
           </div>
         </div>

@@ -26,8 +26,8 @@ const MyProductsList = ({ books, showNavigateButton = true }) => {
           </CarouselContent>
           {showNavigateButton && (
             <>
-              <CarouselPrevious />
-              <CarouselNext />
+              <CarouselPrevious className="-translate-y-16 rounded-sm " />
+              <CarouselNext className="-translate-y-16 rounded-sm" />
             </>
           )}
         </Carousel>

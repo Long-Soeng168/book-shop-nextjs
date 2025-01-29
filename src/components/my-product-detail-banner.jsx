@@ -11,8 +11,8 @@ import { getSlides } from "@/services/slides-services";
 import Link from "next/link";
 import { IMAGE_SLIDE_URL } from "@/config/env";
 
-const MyProductDetailBanner = async ({className}) => {
-  const topSlides = await getSlides({ position: "product_detail" }) || [];
+const MyProductDetailBanner = async ({ className }) => {
+  const topSlides = (await getSlides({ position: "product_detail" })) || [];
   return (
     <div className={className}>
       {topSlides.length > 0 && (
@@ -23,7 +23,9 @@ const MyProductDetailBanner = async ({className}) => {
                 <Link href={slide.link || "#"}>
                   <Image
                     className={`w-full object-cover h-auto transition-all duration-500 ${
-                      slide.link ? "hover:scale-95 border-primary hover:border-2" : ""
+                      slide.link
+                        ? "hover:scale-95 border-primary hover:border-2"
+                        : ""
                     }`}
                     width={1050}
                     height={300}
@@ -33,9 +35,9 @@ const MyProductDetailBanner = async ({className}) => {
                 </Link>
               </CarouselItem>
             ))}
-          </CarouselContent >
-          <CarouselPrevious className='rounded-none opacity-70 -left-0' />
-          <CarouselNext className='rounded-none opacity-70 -right-0' />
+          </CarouselContent>
+          <CarouselPrevious className="rounded-none opacity-70 " />
+          <CarouselNext className="rounded-none opacity-70 " />
         </Carousel>
       )}
     </div>
