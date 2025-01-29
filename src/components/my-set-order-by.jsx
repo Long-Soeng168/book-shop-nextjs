@@ -71,6 +71,14 @@ const MySetOrderBy = () => {
             {t("sortBy")} :{" "}
             <span className="font-semibold">{t("publishedYear")}</span>
           </SelectItem>
+          <SelectItem value="bestSelling">
+            {t("sortBy")} :{" "}
+            <span className="font-semibold">{t("bestSelling")}</span>
+          </SelectItem>
+          <SelectItem value="totalView">
+            {t("sortBy")} :{" "}
+            <span className="font-semibold">{t("totalView")}</span>
+          </SelectItem>
         </SelectContent>
       </Select>
       <Select
