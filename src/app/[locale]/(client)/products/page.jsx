@@ -21,6 +21,7 @@ import MySelectFilter from "./components/my-select-filter";
 import MyLoadingAnimation from "@/components/ui/my-loading-animation";
 import { getTranslations } from "next-intl/server";
 import ScrollToTop from "@/components/scroll-to-top";
+import MyFilterQueries from "./components/my-filter-queries";
 
 const Page = async (props) => {
   const t = await getTranslations("Index");
@@ -151,6 +152,25 @@ const Page = async (props) => {
           </div>
         </div>
         {/* End books Header */}
+
+        {/* Start All Filter Query */}
+        <MyFilterQueries key={
+            "filter-queries-key" +
+            search +
+            currentPage +
+            perPage +
+            categoryId +
+            subCategoryId +
+            orderBy +
+            orderDir +
+            priceFrom +
+            priceTo +
+            yearFrom +
+            yearTo +
+            authorId +
+            publisherId
+          } />
+        {/* End All Filter Query */}
 
         {/* Start books List */}
         <Suspense

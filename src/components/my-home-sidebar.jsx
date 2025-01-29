@@ -23,14 +23,16 @@ export function MyHomeSidebar({ categories, isModal = false }) {
   const currentCategoryId = searchParams.get("categoryId")?.toString();
   const currentSubCategoryId = searchParams.get("subCategoryId")?.toString();
 
-  const handleSetCategory = (categoryId) => {
+  const handleSetCategory = (categoryId, categoryName) => {
     const params = new URLSearchParams(searchParams);
     if (categoryId) {
       params.set("categoryId", categoryId);
+      params.set("category", categoryName);
       params.delete("subCategoryId");
       params.set("page", 1);
     } else {
       params.delete("categoryId");
+      params.delete("category");
     }
     if (isModal) {
       replace(`/products?${params.toString()}`);
@@ -39,11 +41,13 @@ export function MyHomeSidebar({ categories, isModal = false }) {
     }
   };
 
-  const handleSetSubCategory = (subCategoryId, categoryId) => {
+  const handleSetSubCategory = (subCategoryId, categoryId, categoryName, subCategoryName) => {
     const params = new URLSearchParams(searchParams);
     if (subCategoryId) {
       params.set("subCategoryId", subCategoryId);
       params.set("categoryId", categoryId);
+      params.set("category", categoryName);
+      params.set("subCategory", subCategoryName);
       params.set("page", 1);
     } else {
       params.delete("subCategoryId");
@@ -74,7 +78,12 @@ export function MyHomeSidebar({ categories, isModal = false }) {
           >
             <div className="flex items-stretch justify-between transition-all duration-500 cursor-pointer">
               <button
-                onClick={() => handleSetCategory(category.id)}
+                onClick={() =>
+                  handleSetCategory(
+                    category.id,
+                    locale == "kh" ? category.name_kh : category.name
+                  )
+                }
                 className={`${
                   currentCategoryId == category.id &&
                   "underline font-semibold bg-primary group text-primary-foreground hover:text-primary"
@@ -122,7 +131,12 @@ export function MyHomeSidebar({ categories, isModal = false }) {
                           "underline font-semibold"
                         } relative pl-2 max-w-[85%] w-full text-left underline-offset-4 cursor-pointer hover:underline`}
                         onClick={() => {
-                          handleSetSubCategory(subCategory.id, category.id);
+                          handleSetSubCategory(
+                            subCategory.id,
+                            category.id,
+                            locale == "kh" ? category.name_kh : category.name,
+                            locale == "kh" ? subCategory.name_kh : subCategory.name
+                          );
                         }}
                       >
                         {locale == "kh"

@@ -34,19 +34,21 @@ export function SelectAuthor({ authors }) {
   const [value, setValue] = React.useState(currentAuthorId || "");
 
   // Generate the URL with updated authorId parameter
-  const createauthorURL = (authorId) => {
+  const createauthorURL = (authorId, author) => {
     const params = new URLSearchParams(searchParams);
     if (authorId) {
       params.set("authorId", authorId);
+      params.set("author", author);
       params.set("page", 1);
     } else {
       params.delete("authorId");
+      params.delete("author");
     }
     return `${pathname}?${params.toString()}`;
   };
 
-  const handleauthorChange = (authorId) => {
-    const newURL = createauthorURL(authorId);
+  const handleauthorChange = (authorId, author) => {
+    const newURL = createauthorURL(authorId, author);
     replace(newURL); // Update the URL without reloading the page
   };
 
@@ -96,7 +98,8 @@ export function SelectAuthor({ authors }) {
                     setValue(value == author.id ? "" : author.id);
                     setOpen(false);
                     handleauthorChange(
-                      value == author.id ? "" : author.id
+                      value == author.id ? "" : author.id,
+                      value == author.id ? "" : author.name
                     );
                   }}
                 >

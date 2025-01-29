@@ -17,9 +17,9 @@ const ClientLayout = ({ children }) => {
             </Suspense>
           </div>
         </div>
-        <div className="min-h-[55vh] px-2 mx-auto max-w-screen-xl">
+        <main className="min-h-[55vh] px-2 mx-auto max-w-screen-xl">
           {children}
-        </div>
+        </main>
         <ToTopButton />
         <TelegramButton />
         <MyFooter />

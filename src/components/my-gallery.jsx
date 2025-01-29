@@ -36,7 +36,7 @@ const MyImageGallery = ({ images }) => {
           height={600}
           src={images[0]}
           alt="Large Image"
-          className="object-cover w-full transition-all duration-300 rounded-lg cursor-pointer hover:scale-95"
+          className="object-cover w-full transition-all duration-300 border rounded-lg cursor-pointer border-primary/20 hover:scale-95"
           onClick={() => {
             setCurrentIndex(0);
             setOpen(true);
@@ -50,7 +50,7 @@ const MyImageGallery = ({ images }) => {
           {images.slice(1).map((photo, index) => (
             <CarouselItem
               key={index}
-              className="pl-2 basis-1/3"
+              className="basis-1/3"
             >
               <Image
                 width={600}

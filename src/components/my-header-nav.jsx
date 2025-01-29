@@ -14,7 +14,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
-import { AlignLeft, ChevronRight } from "lucide-react";
+import { AlignLeft, ChevronRight, ImageIcon } from "lucide-react";
 import MyCategoryPanel from "./my-categories-panel";
 import { IMAGE_BOOK_URL, IS_SHOW_KID_BOOKS } from "@/config/env";
 import { useSearchParams } from "next/navigation";
@@ -37,10 +37,13 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
             searchParams.get("categoryId") +
             searchParams.get("subCategoryId")
           }
+          className="h-full border border-white rounded-lg"
         >
-          <NavigationMenuTrigger>
-            <AlignLeft size={18} className="mr-1" /> {t("categories")}
-          </NavigationMenuTrigger>
+          <span >
+            <NavigationMenuTrigger>
+              <AlignLeft size={18} className="mr-1" /> {t("categories")}
+            </NavigationMenuTrigger>
+          </span>
           <NavigationMenuContent>
             <MyCategoryPanel categoriesData={categories} />
           </NavigationMenuContent>
@@ -99,15 +102,23 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                   >
                     <div>
                       <div className="relative">
-                        <Image
-                          width={100}
-                          height={100}
-                          className="object-cover border-[0.5px] border-primary w-full rounded-md aspect-[6/9]"
-                          src={
-                            IMAGE_BOOK_URL + 'thumb/' + categoryMostBook?.books[0].image
-                          }
-                          alt={categoryMostBook?.books[0].title}
-                        />
+                        {categoryMostBook?.books[0].image ? (
+                          <Image
+                            width={100}
+                            height={100}
+                            className="object-cover border-[0.5px] border-primary w-full rounded-md aspect-[6/9]"
+                            src={
+                              IMAGE_BOOK_URL +
+                              "thumb/" +
+                              categoryMostBook?.books[0].image
+                            }
+                            alt={categoryMostBook?.books[0].title}
+                          />
+                        ) : (
+                          <div className="flex items-center justify-center w-full border rounded-sm bg-secondary aspect-[6/9]">
+                            <ImageIcon size={70} className="text-border" />
+                          </div>
+                        )}
                         {categoryMostBook?.books[0]?.discount != 0 &&
                           categoryMostBook?.books[0]?.discount != null && (
                             <span className="absolute px-1.5 font-bold text-lg rounded-sm text-white bottom-1.5 left-1.5 bg-primary/80">
@@ -152,13 +163,19 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
                       className="group items-start grid grid-cols-[62px,1fr] gap-2"
                       prefetch={false}
                     >
-                      <Image
-                        width={50}
-                        height={50}
-                        className="object-cover border-[0.5px] border-primary aspect-book w-full aspect-book"
-                        src={IMAGE_BOOK_URL + 'thumb/' + book.image}
-                        alt={"Image's book"}
-                      />
+                      {book.image ? (
+                        <Image
+                          width={50}
+                          height={50}
+                          className="object-cover rounded-sm border-[0.5px] border-primary aspect-book w-full aspect-book"
+                          src={IMAGE_BOOK_URL + "thumb/" + book.image}
+                          alt={"Image's book"}
+                        />
+                      ) : (
+                        <div className="flex items-center justify-center w-full border rounded-sm bg-secondary aspect-[6/9]">
+                          <ImageIcon size={42} className="text-border" />
+                        </div>
+                      )}
 
                       <div>
                         <h4 className="font-medium text-md group-hover:underline line-clamp-2">

@@ -24,6 +24,9 @@ const POSHeaderMenu = ({ className }) => {
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
   const router = useRouter();
+  if (!token) {
+    router.push("/login");
+  }
   const handleLogout = async () => {
     // API URL for logout (update with your backend's actual URL)
     const url = `${BASE_API_URL}/logout`;
@@ -91,8 +94,8 @@ const POSHeaderMenu = ({ className }) => {
 
           <DropdownMenuItem>
             <div>
-              <p className="font-semibold line-clamp-1">{user.name}</p>
-              <p className="line-clamp-2">{user.email}</p>
+              <p className="font-semibold line-clamp-1">{user?.name}</p>
+              <p className="line-clamp-2">{user?.email}</p>
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem>

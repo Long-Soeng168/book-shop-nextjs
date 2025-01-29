@@ -33,7 +33,7 @@ const MyBlogCard = async ({ blog }) => {
       </div>
       <div className="flex justify-end">
         <Button variant="link" className="text-lg text-primary">
-          {t('seeMore')} {'>'}
+          {t('readMore')} {'>'}
         </Button>
       </div>
     </Link>

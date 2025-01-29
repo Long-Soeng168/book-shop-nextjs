@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ImageIcon } from "lucide-react";
 import { ScrollArea } from "./ui/scroll-area";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -130,13 +130,19 @@ const MyCategoryPanel = ({ categoriesData }) => {
                           <Link
                             href={`/products/${book.id}?productTitle=${book.title}`}
                           >
-                            <Image
-                              width={100}
-                              height={100}
-                              className="object-cover w-full rounded-md aspect-[6/9] font-moul"
-                              src={IMAGE_BOOK_URL + book.image}
-                              alt={book.title}
-                            />
+                            {book.image ? (
+                              <Image
+                                width={100}
+                                height={100}
+                                className="object-cover w-full rounded-md aspect-[6/9] font-moul"
+                                src={IMAGE_BOOK_URL + book.image}
+                                alt={book.title}
+                              />
+                            ) : (
+                              <div className="flex items-center justify-center w-full border rounded-sm bg-secondary aspect-[6/9]">
+                                <ImageIcon size={50} className="text-border" />
+                              </div>
+                            )}
                           </Link>
                           {book.discount != 0 && (
                             <span className="absolute px-1.5 font-bold text-xs rounded-sm text-white bottom-1.5 left-1.5 bg-real_primary/80">

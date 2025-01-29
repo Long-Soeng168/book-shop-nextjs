@@ -51,6 +51,7 @@ export default function MySearch({ placeholder }) {
             Search
           </label>
           <input
+            key={searchParams.get("is_delete_search")?.toString()}
             className="block w-full py-2 pl-10 text-sm border border-gray-200 rounded-md peer outline-1 placeholder:text-gray-500"
             placeholder={placeholder}
             onChange={(e) => {
@@ -69,6 +70,7 @@ export default function MySearch({ placeholder }) {
         >
           <Input
             // value={searchQuery}
+            key={searchParams.get("is_delete_search")?.toString()}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="border-none shadow-none dark:text-black dark:placeholder-black min-w-40 focus-visible:ring-0"
             placeholder={t("searchBooks")}

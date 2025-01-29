@@ -33,19 +33,21 @@ export function SelectPublisher({ publishers }) {
   const [value, setValue] = React.useState(currentpublisherId || "");
 
   // Generate the URL with updated publisherId parameter
-  const createpublisherURL = (publisherId) => {
+  const createpublisherURL = (publisherId, publisher) => {
     const params = new URLSearchParams(searchParams);
     if (publisherId) {
       params.set("publisherId", publisherId);
+      params.set("publisher", publisher);
       params.set("page", 1);
     } else {
       params.delete("publisherId");
+      params.delete("publisher");
     }
     return `${pathname}?${params.toString()}`;
   };
 
-  const handlepublisherChange = (publisherId) => {
-    const newURL = createpublisherURL(publisherId);
+  const handlepublisherChange = (publisherId, publisher) => {
+    const newURL = createpublisherURL(publisherId, publisher);
     replace(newURL); // Update the URL without reloading the page
   };
 
@@ -95,7 +97,8 @@ export function SelectPublisher({ publishers }) {
                     setValue(value == publisher.id ? "" : publisher.id);
                     setOpen(false);
                     handlepublisherChange(
-                      value == publisher.id ? "" : publisher.id
+                      value == publisher.id ? "" : publisher.id,
+                      value == publisher.id ? "" : publisher.name
                     );
                   }}
                 >

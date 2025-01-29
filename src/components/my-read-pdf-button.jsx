@@ -7,8 +7,8 @@ import { BOOK_PDF_URL } from "@/config/env";
 const MyReadPdfButton = ({ product }) => {
   const handleReadClick = () => {
     const pdfUrl = `${BOOK_PDF_URL}${product?.file}`;
-    localStorage.setItem("pdfUrl", pdfUrl); // Save pdfUrl to localStorage
-    window.location.href = "/pdf-viewer"; // Redirect to the PDF viewer page
+    localStorage.setItem("pdfUrl", pdfUrl);
+    window.location.href = "/pdf-viewer";
   };
 
   return (

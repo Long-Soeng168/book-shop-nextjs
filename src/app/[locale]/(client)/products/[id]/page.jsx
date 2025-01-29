@@ -15,6 +15,7 @@ import { BASE_API_URL, IMAGE_BOOK_URL } from "@/config/env";
 import ScrollToTop from "@/components/scroll-to-top";
 import MyReadPdfButton from "@/components/my-read-pdf-button";
 import { EyeIcon } from "lucide-react";
+import MyProductDetailBanner from "@/components/my-product-detail-banner";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -39,9 +40,7 @@ const ProductPage = async ({ params }) => {
 
   let images = [];
   if (product?.images?.length > 0) {
-    images = product?.images.map(
-      (item) => IMAGE_BOOK_URL + item.image
-    );
+    images = product?.images.map((item) => IMAGE_BOOK_URL + item.image);
   }
 
   if (product == 404) {
@@ -71,7 +70,7 @@ const ProductPage = async ({ params }) => {
     <div className="lg:flex">
       <ScrollToTop />
       <div className="w-full lg:flex-1">
-        <div className="grid w-full grid-cols-12 gap-2 mx-auto mt-8 ">
+        <div className="grid w-full grid-cols-12 gap-2 mx-auto mt-8 mb-8">
           <div className="col-span-12 mx-6 mb-6 md:col-span-4 md:px-0">
             <div className="pb-4 ">
               <MyGallery images={[image, ...images]} />
@@ -220,11 +219,19 @@ const ProductPage = async ({ params }) => {
             )}
           </div>
         </div>
-        <MyShowMoreText
-          maxLine={10}
-          text={product?.description}
-          is_scroll={true}
-        />
+        {product?.description && (
+          <div className="my-20">
+            <MyShowMoreText
+              maxLine={10}
+              text={product?.description}
+              is_scroll={true}
+            />
+          </div>
+        )}
+
+        <Suspense fallback={<MyLoadingAnimation />}>
+          <MyProductDetailBanner />
+        </Suspense>
 
         <Suspense key={product?.category_id} fallback={<MyLoadingAnimation />}>
           <RelatedProducts categoryId={product?.category_id} />

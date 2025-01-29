@@ -29,6 +29,8 @@
         "returnToHomepage": "Return to Homepage",
 
         "category": "Category",
+        "subCategory": "Sub Category",
+        "search": "Search",
         "searchCategory": "Search Category",
         "searchBooks": "Search Books...",
         "searchNews": "Search News...",
