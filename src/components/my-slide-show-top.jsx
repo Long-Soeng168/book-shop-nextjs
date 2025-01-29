@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React from "react";
 import {
   Carousel,
@@ -12,8 +12,7 @@ import Link from "next/link";
 import { IMAGE_SLIDE_URL } from "@/config/env";
 import Autoplay from "embla-carousel-autoplay";
 
-const MyProductDetailBanner = ({ className, topSlides }) => {
-  
+const MySlideShowTop = ({ className, topSlides }) => {
   return (
     <div className={className}>
       {topSlides.length > 0 && (
@@ -23,14 +22,14 @@ const MyProductDetailBanner = ({ className, topSlides }) => {
               delay: 3000,
             }),
           ]}
-          opts={{ align: "start", loop: true }}
+          opts={{ align: "start", loop: false }}
         >
           <CarouselContent>
             {topSlides.map((slide) => (
               <CarouselItem key={slide.id}>
                 <Link href={slide.link || "#"}>
                   <Image
-                    className={`w-full object-cover h-auto transition-all duration-500 ${
+                    className={`w-full aspect-[21/7] object-cover transition-all duration-500 ${
                       slide.link
                         ? "hover:scale-95 border-primary hover:border-2"
                         : ""
@@ -44,12 +43,12 @@ const MyProductDetailBanner = ({ className, topSlides }) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="invisible rounded-none opacity-70 md:visible" />
-          <CarouselNext className="invisible rounded-none opacity-70 md:visible" />
+          <CarouselPrevious className="rounded-none " />
+          <CarouselNext className="rounded-none " />
         </Carousel>
       )}
     </div>
   );
 };
 
-export default MyProductDetailBanner;
+export default MySlideShowTop;

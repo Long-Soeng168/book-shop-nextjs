@@ -16,6 +16,7 @@ import ScrollToTop from "@/components/scroll-to-top";
 import MyReadPdfButton from "@/components/my-read-pdf-button";
 import { EyeIcon } from "lucide-react";
 import MyProductDetailBanner from "@/components/my-product-detail-banner";
+import { getSlides } from "@/services/slides-services";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -46,6 +47,8 @@ const ProductPage = async ({ params }) => {
   if (product == 404) {
     notFound();
   }
+
+  const topSlides = (await getSlides({ position: "product_detail" })) || [];
 
   async function getBook() {
     const url = BASE_API_URL + `/books/${id}`;
@@ -230,7 +233,7 @@ const ProductPage = async ({ params }) => {
         )}
 
         <Suspense fallback={<MyLoadingAnimation />}>
-          <MyProductDetailBanner />
+          <MyProductDetailBanner topSlides={topSlides} />
         </Suspense>
 
         <Suspense key={product?.category_id} fallback={<MyLoadingAnimation />}>
