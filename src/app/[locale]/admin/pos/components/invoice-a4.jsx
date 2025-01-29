@@ -1,17 +1,15 @@
 import {
+  APP_CONTACT,
   APP_EMAIL,
   APP_LOGO,
+  APP_NAME,
   APP_NAME_KH,
   APP_PAYMENT_MAYTHOD,
   APP_WEBSITE,
 } from "@/config/website-detail";
-import Image from "next/image";
 
 const InvoiceA4 = ({
-  invoice,
-  APP_NAME,
-  APP_ADDRESS,
-  APP_CONTACT,
+  invoice, 
   contentRef,
 }) => {
   return (

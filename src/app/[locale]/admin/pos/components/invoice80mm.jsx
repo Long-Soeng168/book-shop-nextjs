@@ -1,19 +1,13 @@
-import Image from "next/image";
 import {
+  APP_CONTACT,
   APP_EMAIL,
-  APP_LOGO,
+  APP_LOGO_POS_80_PINTER,
+  APP_NAME,
   APP_NAME_KH,
-  APP_PAYMENT_MAYTHOD,
   APP_WEBSITE,
 } from "@/config/website-detail";
 
-const Invoice80mm = ({
-  invoice,
-  APP_NAME,
-  APP_ADDRESS,
-  APP_CONTACT,
-  contentRef,
-}) => {
+const Invoice80mm = ({ invoice, contentRef }) => {
   return (
     <div className="relative mb-4 overflow-y-auto border border-gray-300 border-dashed rounded-lg custom-scrollbar">
       <div
@@ -23,11 +17,12 @@ const Invoice80mm = ({
         {/* Header Section */}
         <div className="flex gap-1 items-top">
           <img
+            loading="eager"
             alt="App Logo"
             width={60}
             height={60}
-            src={APP_LOGO}
-            className="object-contain w-10 h-10"
+            src={APP_LOGO_POS_80_PINTER}
+            className="object-contain w-auto h-10"
           />
           <div className="flex flex-col justify-center text-start">
             <p className="text-sm font-bold text-gray-800">{APP_NAME_KH}</p>
@@ -54,39 +49,43 @@ const Invoice80mm = ({
             INVOICE
           </h2>
 
-          <div className="flex flex-col gap-0.5">
-            <p className="text-[10px] text-black">
-              <strong>Customer:</strong> {invoice?.customer?.name || "N/A"}
-            </p>
-            <p className="text-[10px] text-black">
-              <strong>Address:</strong> {invoice?.customer?.address || "N/A"}
-            </p>
-            <p className="text-[10px] text-black">
-              <strong>Telephone:</strong> {invoice?.customer?.phone || "N/A"}
-            </p>
-            {invoice?.payment?.name && (
+          <div className="flex mb-2">
+            <div className="flex flex-1 flex-col gap-0.5">
               <p className="text-[10px] text-black">
-                <strong>Pay By:</strong> {invoice?.payment?.name || "N/A"}
+                <strong>Customer:</strong> {invoice?.customer?.name || "N/A"}
               </p>
-            )}
-            <p className="text-[10px] text-black">
-              <strong>No:</strong> #
-              {new Intl.NumberFormat("en", {
-                minimumIntegerDigits: 6,
-                useGrouping: false,
-              }).format(invoice.id)}
-            </p>
-            <p className="text-[10px] text-black">
-              <strong>Date:</strong>{" "}
-              {invoice?.created_at &&
-                new Date(invoice.created_at).toLocaleDateString("en-GB", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-            </p>
+              <p className="text-[10px] text-black">
+                <strong>Address:</strong> {invoice?.customer?.address || "N/A"}
+              </p>
+              <p className="text-[10px] text-black">
+                <strong>Telephone:</strong> {invoice?.customer?.phone || "N/A"}
+              </p>
+              {invoice?.payment?.name && (
+                <p className="text-[10px] text-black">
+                  <strong>Pay By:</strong> {invoice?.payment?.name || "N/A"}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-1 flex-col gap-0.5">
+              <p className="text-[10px] text-black">
+                <strong>No:</strong> #
+                {new Intl.NumberFormat("en", {
+                  minimumIntegerDigits: 6,
+                  useGrouping: false,
+                }).format(invoice.id)}
+              </p>
+              <p className="text-[10px] text-black">
+                <strong>Date:</strong>{" "}
+                {invoice?.created_at &&
+                  new Date(invoice.created_at).toLocaleDateString("en-GB", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+              </p>
+            </div>
           </div>
         </div>
 

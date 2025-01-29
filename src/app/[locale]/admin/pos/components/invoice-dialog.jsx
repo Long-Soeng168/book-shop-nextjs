@@ -9,18 +9,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { File, FileDown, HandHeartIcon, ReceiptTextIcon } from "lucide-react";
+import { FileDown, ReceiptTextIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import html2pdf from "html2pdf.js";
 import { useInvoiceContext } from "@/contexts/POSInvoiceContext";
-import {
-  APP_ADDRESS,
-  APP_CONTACT,
-  APP_EMAIL,
-  APP_NAME,
-} from "@/config/website-detail";
-import Image from "next/image";
 import Invoice80mm from "./invoice80mm";
 import InvoiceA4 from "./invoice-a4";
 import InvoiceQuotation from "./invoice-quotation";
@@ -28,6 +21,7 @@ import InvoiceQuotation from "./invoice-quotation";
 const InvoiceDialog = () => {
   const [printSize, setPrintSize] = React.useState("80");
   const [isClient, setIsClient] = React.useState(false);
+
   React.useEffect(() => {
     setIsClient(true);
   }, []);
@@ -77,25 +71,16 @@ const InvoiceDialog = () => {
             <Invoice80mm
               contentRef={contentRef}
               invoice={invoice}
-              APP_NAME={APP_NAME}
-              APP_ADDRESS={APP_ADDRESS}
-              APP_CONTACT={APP_CONTACT}
             />
           ) : printSize === "quote" ? (
             <InvoiceQuotation
               contentRef={contentRef}
               invoice={invoice}
-              APP_NAME={APP_NAME}
-              APP_ADDRESS={APP_ADDRESS}
-              APP_CONTACT={APP_CONTACT}
             />
           ) : (
             <InvoiceA4
               contentRef={contentRef}
               invoice={invoice}
-              APP_NAME={APP_NAME}
-              APP_ADDRESS={APP_ADDRESS}
-              APP_CONTACT={APP_CONTACT}
             />
           )}
 

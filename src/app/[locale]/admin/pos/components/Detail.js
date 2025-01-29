@@ -73,7 +73,9 @@ export default function Detail({ payments, customers }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const [selectedPayment, setSelectedPayment] = useState(null);
+  const [selectedPayment, setSelectedPayment] = useState(
+    payments[0].id || null
+  );
   const [selectedPaymentError, setSelectedPaymentError] = useState(null);
 
   const getTotalAfterDiscountRiel = () => {
@@ -374,7 +376,7 @@ export default function Detail({ payments, customers }) {
                 <ShadCNButton
                   onClick={() => {
                     clearCart();
-                    setOrderNote('');
+                    setOrderNote("");
                     setIsOpenSuccessDialog(true);
                     setSuccessMessage("Clear Items Successfully.");
                     setIsOpenDialog(false);

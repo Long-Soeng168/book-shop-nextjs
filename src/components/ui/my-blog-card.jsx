@@ -9,13 +9,13 @@ const MyBlogCard = async ({ blog }) => {
   return (
     <Link
       href={`blogs/${blog.id}`}
-      className="flex flex-col justify-between p-2 transition-shadow duration-300 rounded-lg cursor-pointer border-border bg-accent hover:shadow-xl"
+      className="flex flex-col justify-between transition-shadow duration-300 cursor-pointer rounded-xl border-border bg-secondary/50 hover:shadow-xl"
     >
       <div>
         <Image
           width={600}
           height={600}
-          className="object-cover w-full rounded-md aspect-video"
+          className="object-cover w-full rounded-tl-lg rounded-tr-lg aspect-video"
           src={IMAGE_BLOG_URL + blog.image}
           alt={'Image\'s ' + blog.name}
         />
@@ -31,7 +31,7 @@ const MyBlogCard = async ({ blog }) => {
           </p> */}
         </div>
       </div>
-      <div className="flex justify-end">
+      <div className="flex justify-end pb-1">
         <Button variant="link" className="text-lg text-primary">
           {t('readMore')} {'>'}
         </Button>
