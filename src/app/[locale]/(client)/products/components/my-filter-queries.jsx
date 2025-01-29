@@ -44,7 +44,7 @@ const MyFilterQueries = () => {
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-2 pt-1">
+    <div className="flex flex-wrap items-center gap-2 py-2">
       {searchParams.get("search")?.toString() && (
         <div className="flex items-center pl-2 rounded-md bg-secondary">
           <span className="mr-2">
