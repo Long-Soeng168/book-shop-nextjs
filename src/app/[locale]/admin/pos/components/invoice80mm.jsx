@@ -17,7 +17,6 @@ const Invoice80mm = ({ invoice, contentRef }) => {
         {/* Header Section */}
         <div className="flex gap-1 items-top">
           <img
-            loading="eager"
             alt="App Logo"
             width={60}
             height={60}
