@@ -1,5 +1,5 @@
-const BASE_BACKEND_URL = "https://admin.thnal.org";
-const APP_URL = "https://www.thnal.org/";
+const BASE_BACKEND_URL = "https://admin.scholarkh.com";
+const APP_URL = "https://www.scholarkh.com/";
 
 const IS_SHOW_KID_BOOKS = true;
 const EXCHANGE_RATE = 4100;
