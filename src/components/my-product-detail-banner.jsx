@@ -36,8 +36,8 @@ const MyProductDetailBanner = async ({ className }) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="rounded-none opacity-70 " />
-          <CarouselNext className="rounded-none opacity-70 " />
+          <CarouselPrevious className="invisible rounded-none opacity-70 md:visible" />
+          <CarouselNext className="invisible rounded-none opacity-70 md:visible" />
         </Carousel>
       )}
     </div>

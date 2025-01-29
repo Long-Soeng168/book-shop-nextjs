@@ -16,7 +16,7 @@ const DataList = async ({
   yearFrom,
   yearTo,
   authorId,
-  publisherId
+  publisherId,
 }) => {
   let results = await getBooks({
     categoryId: categoryId,
@@ -37,9 +37,13 @@ const DataList = async ({
   return (
     <div>
       <div className="grid grid-cols-2 gap-4 pt-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {books?.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
+        {books?.length > 0 ? (
+          books?.map((product) => (
+            <ProductCard product={product} key={product.id} />
+          ))
+        ) : (
+          <p>No Data...</p>
+        )}
       </div>
       {/* End books List */}
 

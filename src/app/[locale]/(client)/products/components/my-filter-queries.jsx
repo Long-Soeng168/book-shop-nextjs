@@ -128,7 +128,7 @@ const MyFilterQueries = () => {
       {searchParams.get("yearFrom")?.toString() && (
         <div className="flex items-center pl-2 rounded-md bg-secondary">
           <span className="mr-2">
-            {t("from")}{t("year")} : {searchParams.get("yearFrom")?.toString()}
+            {t("fromYear")} : {searchParams.get("yearFrom")?.toString()}
           </span>
           <Button
             variant="secondary"
@@ -144,7 +144,7 @@ const MyFilterQueries = () => {
       {searchParams.get("yearTo")?.toString() && (
         <div className="flex items-center pl-2 rounded-md bg-secondary">
           <span className="mr-2">
-            {t("to")}{t("year")} : {searchParams.get("yearTo")?.toString()}
+            {t("toYear")} : {searchParams.get("yearTo")?.toString()}
           </span>
           <Button
             variant="secondary"
@@ -160,7 +160,7 @@ const MyFilterQueries = () => {
       {searchParams.get("priceFrom")?.toString() >= 0 && (
         <div className="flex items-center pl-2 rounded-md bg-secondary">
           <span className="mr-2">
-            {t("from")}{t("price")} : {searchParams.get("priceFrom")?.toString()}
+            {t("fromPrice")} : {searchParams.get("priceFrom")?.toString()} {' $'}
           </span>
           <Button
             variant="secondary"
@@ -176,7 +176,7 @@ const MyFilterQueries = () => {
       {searchParams.get("priceTo")?.toString() && (
         <div className="flex items-center pl-2 rounded-md bg-secondary">
           <span className="mr-2">
-            {t("to")}{t("price")} : {searchParams.get("priceTo")?.toString()}
+            {t("toPrice")} : {searchParams.get("priceTo")?.toString()} {' $'}
           </span>
           <Button
             variant="secondary"

@@ -103,6 +103,10 @@
         "newArrivals": "New Arrivals",
 
         "kidBooks": "Kid Books",
-        "totalView": "Total View"
+        "totalView": "Total View",
+        "fromYear": "From Year",
+        "toYear": "To Year",
+        "fromPrice": "From Price",
+        "toPrice": "To Price"
     }
 }

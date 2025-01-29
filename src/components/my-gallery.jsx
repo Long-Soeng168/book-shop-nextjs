@@ -45,12 +45,12 @@ const MyImageGallery = ({ images }) => {
       </div>
 
       {/* Thumbnails for the rest of the images */}
-      <Carousel className="mt-2 lg:mt-4">
-        <CarouselContent>
+      <Carousel className="mt-2">
+        <CarouselContent className='-ml-2'>
           {images.slice(1).map((photo, index) => (
             <CarouselItem
               key={index}
-              className="basis-1/3"
+              className="pl-2 basis-1/3"
             >
               <Image
                 width={600}

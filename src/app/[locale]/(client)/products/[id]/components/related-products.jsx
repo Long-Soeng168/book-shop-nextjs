@@ -14,7 +14,7 @@ const RelatedProducts = async ({ categoryId }) => {
   const relatedBooks = resultBooks?.data;
 
   return (
-    <div className="flex flex-col gap-2 mt-16 mb-4">
+    <div className="flex flex-col gap-2 mt-10 mb-4">
       <MyProductHeader title={t("related")} categoryId={categoryId} />
       {relatedBooks?.length > 0 ? (
         <MyProductsList books={relatedBooks} showNavigateButton={true} />

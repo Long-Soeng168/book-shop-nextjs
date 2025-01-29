@@ -70,8 +70,8 @@ const ProductPage = async ({ params }) => {
     <div className="lg:flex">
       <ScrollToTop />
       <div className="w-full lg:flex-1">
-        <div className="grid w-full grid-cols-12 gap-2 mx-auto mt-8 mb-8">
-          <div className="col-span-12 mx-6 mb-6 md:col-span-4 md:px-0">
+        <div className="grid w-full grid-cols-12 gap-2 mx-auto mt-8">
+          <div className="col-span-12 mx-6 mb-6 md:ml-0 md:col-span-4 md:px-0">
             <div className="pb-4 ">
               <MyGallery images={[image, ...images]} />
             </div>
@@ -79,7 +79,7 @@ const ProductPage = async ({ params }) => {
           </div>
 
           {/* Right Item */}
-          <div className="col-span-12 md:col-span-8 no-copy">
+          <div className="col-span-12 px-6 md:col-span-8 md:px-0 no-copy">
             <h1 className="block mt-1 mb-2 text-2xl leading-tight font-lg">
               {product?.title}
             </h1>
@@ -220,7 +220,7 @@ const ProductPage = async ({ params }) => {
           </div>
         </div>
         {product?.description && (
-          <div className="my-20">
+          <div className="px-6 mb-10 md:px-0">
             <MyShowMoreText
               maxLine={10}
               text={product?.description}
