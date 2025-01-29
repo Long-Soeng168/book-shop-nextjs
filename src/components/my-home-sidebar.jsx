@@ -41,7 +41,12 @@ export function MyHomeSidebar({ categories, isModal = false }) {
     }
   };
 
-  const handleSetSubCategory = (subCategoryId, categoryId, categoryName, subCategoryName) => {
+  const handleSetSubCategory = (
+    subCategoryId,
+    categoryId,
+    categoryName,
+    subCategoryName
+  ) => {
     const params = new URLSearchParams(searchParams);
     if (subCategoryId) {
       params.set("subCategoryId", subCategoryId);
@@ -52,7 +57,11 @@ export function MyHomeSidebar({ categories, isModal = false }) {
     } else {
       params.delete("subCategoryId");
     }
-    replace(`${pathname}?${params.toString()}`);
+    if (isModal) {
+      replace(`/products?${params.toString()}`);
+    } else {
+      replace(`${pathname}?${params.toString()}`);
+    }
   };
 
   return (
@@ -135,7 +144,9 @@ export function MyHomeSidebar({ categories, isModal = false }) {
                             subCategory.id,
                             category.id,
                             locale == "kh" ? category.name_kh : category.name,
-                            locale == "kh" ? subCategory.name_kh : subCategory.name
+                            locale == "kh"
+                              ? subCategory.name_kh
+                              : subCategory.name
                           );
                         }}
                       >
