@@ -14,6 +14,7 @@ const nextConfig = {
     remotePatterns: [
       {
         hostname: "admin.scholarkh.com",
+        
       },
     ],
   },
