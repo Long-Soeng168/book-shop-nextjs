@@ -86,12 +86,12 @@ const MySetOrderBy = () => {
         onValueChange={(value) => handleSelectDir(value)}
         defaultValue={searchParams.get("orderDir")?.toString()}
       >
-        <SelectTrigger className="w-[130px]">
+        <SelectTrigger className="w-auto">
           <SelectValue placeholder={t('sortDirection')} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="asc">{t('from')} A {t('to')} Z</SelectItem>
-          <SelectItem value="desc">{t('from')} Z {t('to')} A</SelectItem>
+          <SelectItem value="asc">{t('ascending')}</SelectItem>
+          <SelectItem value="desc">{t('descending')}</SelectItem>
         </SelectContent>
       </Select>
     </div>
