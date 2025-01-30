@@ -43,8 +43,8 @@ const MyProductDetailBanner = ({ className, topSlides }) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="rounded-none  opacity-70 max-md:hidden" />
-          <CarouselNext className="rounded-none  opacity-70 max-md:hidden" />
+          <CarouselPrevious className="rounded-none opacity-70 max-md:hidden" />
+          <CarouselNext className="rounded-none opacity-70 max-md:hidden" />
         </Carousel>
       )}
     </div>
