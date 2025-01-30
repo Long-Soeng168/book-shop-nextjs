@@ -11,8 +11,10 @@
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 242.82 37.12% 44.9%;
-    --primary-true-color: 242.82 37.12% 44.9%;
+    --primary: 205 83% 30%;
+    --primary-true-color: 205 83% 30%;
+    /* --primary: 242.82 37.12% 44.9%; */
+    /* --primary-true-color: 242.82 37.12% 44.9%; */
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
@@ -48,7 +50,8 @@
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;
-    --primary-true-color: 242.82 37.12% 44.9%;
+    --primary-true-color: 205 83% 30%;
+    /* --primary-true-color: 242.82 37.12% 44.9%; */
     --primary-foreground: 0 0% 9%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;

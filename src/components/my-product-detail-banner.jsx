@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React from "react";
 import {
   Carousel,
@@ -13,7 +13,6 @@ import { IMAGE_SLIDE_URL } from "@/config/env";
 import Autoplay from "embla-carousel-autoplay";
 
 const MyProductDetailBanner = ({ className, topSlides }) => {
-  
   return (
     <div className={className}>
       {topSlides.length > 0 && (
@@ -44,8 +43,8 @@ const MyProductDetailBanner = ({ className, topSlides }) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="invisible rounded-none opacity-70 md:visible" />
-          <CarouselNext className="invisible rounded-none opacity-70 md:visible" />
+          <CarouselPrevious className="rounded-none  opacity-70 max-md:hidden" />
+          <CarouselNext className="rounded-none  opacity-70 max-md:hidden" />
         </Carousel>
       )}
     </div>

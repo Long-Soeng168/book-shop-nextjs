@@ -127,7 +127,7 @@ export function LoginForm({ className, ...props }) {
           disabled={loading}
           className={`w-full ${
             loading ? "bg-gray-400" : ""
-          } text-white py-2 rounded-md`}
+          } text-primary-foreground py-2 rounded-md`}
         >
           {loading ? "Logging in..." : "Login"}
         </Button>

@@ -43,8 +43,8 @@ const MySlideShowTop = ({ className, topSlides }) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="rounded-none " />
-          <CarouselNext className="rounded-none " />
+          <CarouselPrevious className="rounded-none max-md:hidden" />
+          <CarouselNext className="rounded-none max-md:hidden" />
         </Carousel>
       )}
     </div>

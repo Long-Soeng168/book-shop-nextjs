@@ -13,7 +13,7 @@ const InvoiceA4 = ({
   contentRef,
 }) => {
   return (
-    <div className="relative mb-4 overflow-y-auto border border-gray-300 border-dashed rounded-lg custom-scrollbar">
+    <div className="relative mb-4 overflow-auto border border-gray-300 border-dashed rounded-lg custom-scrollbar">
       <div
         ref={contentRef}
         className="max-w-4xl p-4 mx-auto text-black bg-white"

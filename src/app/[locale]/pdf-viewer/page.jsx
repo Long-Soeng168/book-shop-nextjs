@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import MySearch from "@/components/ui/my-search";
 import { notFound } from "next/navigation";
-import { APP_LOGO, APP_NAME } from "@/config/website-detail";
+import { APP_LOGO, APP_NAME, APP_NAME_KH } from "@/config/website-detail";
 
 const Page = () => {
   const [isClient, setIsClient] = useState(false);
@@ -36,13 +36,18 @@ const Page = () => {
           <Image
             className="object-contain rounded-md"
             src={APP_LOGO}
-            width={35}
-            height={35}
+            width={66}
+            height={66}
             alt="Logo Image"
           />
-          <p className="text-2xl font-bold max-w-26 text-foreground/80">
-            {APP_NAME}
-          </p>
+          <div>
+            <p className="text-xs font-bold text-primary md:text-sm max-w-26">
+              {APP_NAME_KH}
+            </p>
+            <p className="text-xs font-semibold text-primary md:text-xs max-w-26">
+              {APP_NAME}
+            </p>
+          </div>
         </Link>
         <MySearch />
       </div>

@@ -9,7 +9,7 @@ import {
 
 const Invoice80mm = ({ invoice, contentRef }) => {
   return (
-    <div className="relative mb-4 overflow-y-auto border border-gray-300 border-dashed rounded-lg custom-scrollbar">
+    <div className="relative mb-4 overflow-auto border border-gray-300 border-dashed rounded-lg custom-scrollbar">
       <div
         ref={contentRef}
         className="mx-auto p-4 bg-white text-black w-[80mm]"
