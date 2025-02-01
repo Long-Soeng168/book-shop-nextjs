@@ -58,10 +58,10 @@ export default function InstallPWAButton({ className }) {
     setDeferredPrompt(null);
   };
 
-  // If the app is already installed, don't show the button
-  if (isAppInstalled) {
-    return null;
-  }
+  // // If the app is already installed, don't show the button
+  // if (isAppInstalled) {
+  //   return null;
+  // }
 
   return (
     <>
