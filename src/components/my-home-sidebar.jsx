@@ -29,10 +29,13 @@ export function MyHomeSidebar({ categories, isModal = false }) {
       params.set("categoryId", categoryId);
       params.set("category", categoryName);
       params.delete("subCategoryId");
+      params.delete("subCategory");
       params.set("page", 1);
     } else {
       params.delete("categoryId");
       params.delete("category");
+      params.delete("subCategoryId");
+      params.delete("subCategory");
     }
     if (isModal) {
       replace(`/products?${params.toString()}`);
@@ -96,7 +99,7 @@ export function MyHomeSidebar({ categories, isModal = false }) {
                 className={`${
                   currentCategoryId == category.id &&
                   "underline font-semibold bg-primary group text-primary-foreground hover:text-primary"
-                } hover:bg-primary/10 rounded-tl rounded-bl items-center flex gap-1 p-0.5 w-full text-[16px] hover:underline`}
+                } hover:bg-primary/10 rounded-tl rounded-bl items-center flex gap-1 p-0.5 w-full text-[16px] hover:underline ${!category.sub_categories?.length > 0 && 'rounded'}`}
               >
                 <Image
                   className={`aspect-square p-0.5 bg-white rounded-[2px] dark:bg-gray-100 object-contain`}
@@ -122,7 +125,7 @@ export function MyHomeSidebar({ categories, isModal = false }) {
                 <CollapsibleTrigger
                   className={`${
                     currentCategoryId == category.id &&
-                    "underline font-bold bg-primary group text-white hover:text-primary"
+                    "underline font-bold bg-primary group text-primary-foreground hover:text-primary"
                   } p-0.5 text-[16px] rounded-tr rounded-br px-2 hover:bg-primary/10`}
                 >
                   <LucideChevronDown size={18} />

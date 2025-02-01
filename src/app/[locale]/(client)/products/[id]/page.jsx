@@ -76,7 +76,7 @@ const ProductPage = async ({ params }) => {
         <div className="grid w-full grid-cols-12 gap-2 mx-auto mt-8">
           <div className="col-span-12 mx-6 mb-6 md:ml-0 md:col-span-4 md:px-0">
             <div className="pb-4 ">
-              <MyGallery images={[image, ...images]} />
+              <MyGallery title={product?.title} images={[image, ...images]} />
             </div>
             {product?.file && <MyReadPdfButton product={product} />}
           </div>
@@ -95,7 +95,7 @@ const ProductPage = async ({ params }) => {
                   <MyKeyValueCard title={t("author")}>
                     <Link
                       className="hover:underline underline-offset-4 text-primary"
-                      href={`/products?authorId=${product?.author.id}`}
+                      href={`/products?authorId=${product?.author.id}&author=${product?.author.name}`}
                     >
                       {product?.author.name}
                     </Link>
@@ -105,7 +105,7 @@ const ProductPage = async ({ params }) => {
                   <MyKeyValueCard title={t("publisher")}>
                     <Link
                       className="hover:underline underline-offset-4 text-primary"
-                      href={`/products?publisherId=${product?.publisher.id}`}
+                      href={`/products?publisherId=${product?.publisher.id}&publisher=${product?.publisher.name}`}
                     >
                       {product?.publisher.name}
                     </Link>
@@ -116,7 +116,13 @@ const ProductPage = async ({ params }) => {
                   <MyKeyValueCard title={t("category")}>
                     <Link
                       className="hover:underline underline-offset-4 text-primary"
-                      href={`/products?categoryId=${product?.category.id}`}
+                      href={`/products?categoryId=${
+                        product?.category.id
+                      }&category=${
+                        locale == "kh"
+                          ? product?.category?.name_kh
+                          : product?.category?.name
+                      }`}
                     >
                       {locale == "kh"
                         ? product?.category?.name_kh
@@ -128,7 +134,19 @@ const ProductPage = async ({ params }) => {
                         <p className="mx-2"> / </p>
                         <Link
                           className="hover:underline underline-offset-4 text-primary"
-                          href={`/products?categoryId=${product?.category.id}&subCategoryId=${product?.sub_category.id}`}
+                          href={`/products?categoryId=${
+                            product?.category.id
+                          }&subCategoryId=${
+                            product?.sub_category.id
+                          }&category=${
+                            locale == "kh"
+                              ? product?.category?.name_kh
+                              : product?.category?.name
+                          }&subCategory=${
+                            locale == "kh"
+                              ? product?.sub_category?.name_kh
+                              : product?.sub_category?.name
+                          }`}
                         >
                           {locale == "kh"
                             ? product?.sub_category?.name_kh

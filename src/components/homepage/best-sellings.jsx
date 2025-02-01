@@ -14,7 +14,7 @@ const BestSellings = async () => {
       {(firstBestSellingBooks?.length > 0 ||
         secondBestSellingBooks?.length > 0) && (
         <>
-          <MyProductHeader title={t('bestSelling')} />
+          <MyProductHeader title={t('bestSelling')} link={`/products?orderDir=desc&orderBy=bestSelling`} />
           <div className="flex flex-col gap-4 mb-20">
             <MyProductsList books={firstBestSellingBooks} />
             <MyProductsList books={secondBestSellingBooks} />

@@ -18,26 +18,40 @@ const DataList = async ({
   authorId,
   publisherId,
 }) => {
-  let results = await getBooks({
-    categoryId: categoryId,
-    subCategoryId: subCategoryId,
-    search: search,
-    page: currentPage,
-    perPage: perPage,
-    orderBy: orderBy,
-    orderDir: orderDir,
-    priceFrom: priceFrom,
-    priceTo: priceTo,
-    yearFrom: yearFrom,
-    yearTo: yearTo,
-    authorId: authorId,
-    publisherId: publisherId,
-  });
-  const books = results?.data;
+  let books = [];
+  let results = null;
+  let errorMessage = "";
+
+  try {
+    results = await getBooks({
+      categoryId,
+      subCategoryId,
+      search,
+      page: currentPage,
+      perPage,
+      orderBy,
+      orderDir,
+      priceFrom,
+      priceTo,
+      yearFrom,
+      yearTo,
+      authorId,
+      publisherId,
+    });
+
+    books = results?.data || [];
+  } catch (error) {
+    console.error("Error fetching books:", error);
+    errorMessage = "Failed to load books. Please try again later.";
+  }
+
   return (
     <div>
+      {/* Books Grid */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {books?.length > 0 ? (
+        {errorMessage ? (
+          <p className="text-red-500">{errorMessage}</p>
+        ) : books?.length > 0 ? (
           books?.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))
@@ -45,16 +59,19 @@ const DataList = async ({
           <p>No Data...</p>
         )}
       </div>
-      {/* End books List */}
+      {/* End Books List */}
 
-      <div className="flex items-center justify-between pt-8">
-        <MyPagination
-          links={results?.links}
-          from={results?.from}
-          to={results?.to}
-          total={results?.total}
-        />
-      </div>
+      {/* Pagination */}
+      {results && results?.links && (
+        <div className="flex items-center justify-between pt-8">
+          <MyPagination
+            links={results.links}
+            from={results.from}
+            to={results.to}
+            total={results.total}
+          />
+        </div>
+      )}
     </div>
   );
 };

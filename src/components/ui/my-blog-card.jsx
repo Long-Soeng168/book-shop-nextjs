@@ -20,7 +20,7 @@ const MyBlogCard = async ({ blog }) => {
           alt={'Image\'s ' + blog.name}
         />
         <div className="m-2">
-          <h3 className="text-xl font-bold text-foreground line-clamp-2">
+          <h3 className="text-lg font-semibold text-foreground line-clamp-2">
             {blog.name}
           </h3>
           {/* <p className="mb-2 text-background-foreground line-clamp-3">

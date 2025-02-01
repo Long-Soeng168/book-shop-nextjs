@@ -108,7 +108,7 @@
         "toYear": "To Year",
         "fromPrice": "From Price",
         "toPrice": "To Price",
-        "ascending": "Ascending (A->Z)",
-        "descending": "Descending (Z->A)"
+        "ascending": "Ascending",
+        "descending": "Descending"
     }
 }
