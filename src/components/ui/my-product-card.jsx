@@ -17,7 +17,7 @@ const ProductCard = ({ product, endpoint = "/products" }) => {
     <div className="flex flex-col items-stretch justify-between w-full h-full transition-all duration-500 rounded-lg group hover:scale-95">
       <div>
         <div className="relative mb-1 overflow-hidden">
-          <Link href={`${endpoint}/${product.id}?title=${product?.title}`}>
+          <Link href={`${endpoint}/${product.id}`}>
             {product.image ? (
               <Image
                 width={600}
@@ -39,7 +39,7 @@ const ProductCard = ({ product, endpoint = "/products" }) => {
           )}
           <MyAddToCartMini product={product} />
         </div>
-        <Link href={`${endpoint}/${product.id}?title=${product?.title}`}>
+        <Link href={`${endpoint}/${product.id}`}>
           {product.price > 0 && (
             <div className="flex flex-col justify-between mt-1 lg:items-center lg:flex-row">
               {product.discount != 0 && product.discount != null ? (
