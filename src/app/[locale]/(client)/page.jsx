@@ -8,6 +8,8 @@ import Blogs from "@/components/homepage/blogs";
 import { APP_URL } from "@/config/env";
 import ScrollToTop from "@/components/scroll-to-top";
 import { APP_DESCRIPTION, APP_KEYWORD, APP_LOGO, APP_TITLE } from "@/config/website-detail";
+import InstallPWAButton from "@/components/InstallPWAButton";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
   title: APP_TITLE ,
@@ -57,6 +59,7 @@ export default function Home() {
       <Blogs />
 
       <MyFeatureList className="my-16" />
+      <Toaster />
     </div>
   );
 }

@@ -109,6 +109,7 @@
         "fromPrice": "From Price",
         "toPrice": "To Price",
         "ascending": "Ascending",
-        "descending": "Descending"
+        "descending": "Descending",
+        "installApp": "Install App"
     }
 }

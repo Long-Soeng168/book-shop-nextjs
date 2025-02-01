@@ -33,6 +33,7 @@ yarn-error.log*
 .env*
 **/env.js
 **/website-detail.js
+**/manifest.js
 
 # vercel
 .vercel

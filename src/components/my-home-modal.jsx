@@ -20,6 +20,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { usePathname } from "@/i18n/routing";
+import InstallPWAButton from "./InstallPWAButton";
 
 const MyHomeModal = ({ categories }) => {
   const t = useTranslations("Index");
@@ -122,7 +123,7 @@ const MyHomeModal = ({ categories }) => {
                   >
                     {t("about")}
                   </Link>
-                </li>
+                </li> 
               </ul>
             </div>
           </ScrollArea>

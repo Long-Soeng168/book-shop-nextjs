@@ -20,6 +20,7 @@ import { IMAGE_BOOK_URL, IS_SHOW_KID_BOOKS } from "@/config/env";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/routing";
+import InstallPWAButton from "./InstallPWAButton";
 
 export function MyHeaderNav({ categories, categoryMostBook }) {
   const searchParams = useSearchParams();
@@ -39,7 +40,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
           }
           className="h-full border border-white rounded-lg"
         >
-          <span >
+          <span>
             <NavigationMenuTrigger>
               <AlignLeft size={18} className="mr-1" /> {t("categories")}
             </NavigationMenuTrigger>
@@ -290,7 +291,7 @@ export function MyHeaderNav({ categories, categoryMostBook }) {
               {t("about")}
             </NavigationMenuLink>
           </Link>
-        </NavigationMenuItem>
+        </NavigationMenuItem> 
       </NavigationMenuList>
     </NavigationMenu>
   );

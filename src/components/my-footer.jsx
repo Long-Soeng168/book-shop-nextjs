@@ -4,6 +4,7 @@ import { getLinks } from "@/services/links-services";
 import { getLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { BookText, InfoIcon, Newspaper, PhoneCall } from "lucide-react";
+import InstallPWAButton from "./InstallPWAButton";
 
 const MyFooter = async () => {
   const t = await getTranslations("Index");
@@ -31,16 +32,35 @@ const MyFooter = async () => {
             <h4 className="mb-2 text-lg ">{t("menu")}</h4>
             <ul className="list-disc list-inside">
               <li className="hover:underline">
-                <Link className="inline-flex items-center gap-2" href="/products"><BookText size={18} /> {t("books")}</Link>
+                <Link
+                  className="inline-flex items-center gap-2"
+                  href="/products"
+                >
+                  <BookText size={18} /> {t("books")}
+                </Link>
               </li>
               <li className="hover:underline">
-                <Link className="inline-flex items-center gap-2" href="/blogs"><Newspaper size={18} /> {t("news")}</Link>
+                <Link className="inline-flex items-center gap-2" href="/blogs">
+                  <Newspaper size={18} /> {t("news")}
+                </Link>
               </li>
               <li className="hover:underline">
-                <Link className="inline-flex items-center gap-2" href="/contact"><PhoneCall size={18} /> {t("contact")}</Link>
+                <Link
+                  className="inline-flex items-center gap-2"
+                  href="/contact"
+                >
+                  <PhoneCall size={18} /> {t("contact")}
+                </Link>
               </li>
               <li className="hover:underline">
-                <Link className="inline-flex items-center gap-2" href="/about"><InfoIcon size={18} /> {t("about")}</Link>
+                <Link className="inline-flex items-center gap-2" href="/about">
+                  <InfoIcon size={18} /> {t("about")}
+                </Link>
+              </li>
+              <li>
+                <InstallPWAButton
+                  className={`inline-flex items-center gap-2`}
+                />
               </li>
             </ul>
           </div>
@@ -66,14 +86,15 @@ const MyFooter = async () => {
       </div>
       <div className="mt-8 text-center">
         <p>
-          {locale == "kh" ? footer?.copyright_kh : footer?.copyright}{" "}
-          <span className="mx-4">|</span> {locale == "kh" ? "ដោយ" : "By"} :{" "}
+          {locale == "kh" ? "ដោយ" : "By"} :{" "}
           <a
             href="https://alphalib.org/"
             className="font-semibold hover:underline"
           >
             Alphalib
           </a>
+          <span className="mx-4">|</span>
+          {locale == "kh" ? footer?.copyright_kh : footer?.copyright}{" "}
         </p>
       </div>
     </footer>

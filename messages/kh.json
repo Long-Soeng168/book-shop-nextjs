@@ -109,6 +109,7 @@
         "fromPrice": "ពីតម្លៃ",
         "toPrice": "ដល់តម្លៃ",
         "ascending": "លំដាប់ឡើង",
-        "descending": "លំដាប់ចុះ"
+        "descending": "លំដាប់ចុះ",
+        "installApp": "ទាញយកកម្មវិធី"
     }
 }
