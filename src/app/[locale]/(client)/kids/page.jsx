@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import { getCategories } from "@/services/categories-services";
 import DataList from "./components/data-list";
 import LoadingDataList from "./components/loading-data-list";
 import { getTranslations } from "next-intl/server";

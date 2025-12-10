@@ -9,7 +9,7 @@ import { useCart } from "@/contexts/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { ListX, Trash2Icon, X } from "lucide-react";
+import { Trash2Icon, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import ScrollToTop from "@/components/scroll-to-top";
 
