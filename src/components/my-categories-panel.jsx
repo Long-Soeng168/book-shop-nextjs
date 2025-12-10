@@ -106,7 +106,7 @@ const MyCategoryPanel = ({ categoriesData }) => {
         )}
 
       {/* Books/Items */}
-      {activeSubCategory &&
+      {/* {activeSubCategory &&
         categoriesData
           .find((category) => category.name === activeCategory)
           ?.sub_categories?.find(
@@ -202,7 +202,7 @@ const MyCategoryPanel = ({ categoriesData }) => {
               </div>
             )}
           </ScrollArea>
-        )}
+        )} */}
     </div>
   );
 };
